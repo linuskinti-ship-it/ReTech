@@ -2,6 +2,8 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://*.firebaseapp.com https://www.gstatic.com; frame-src https://*.firebaseapp.com https://*.google.com https://*.googleapis.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="ReTech collecte les appareils électroniques hors d'usage et vend des composants testés à Abomey-Bohicon, Bénin.">
 <title>ReTech — Composants électroniques récupérés | Abomey-Bohicon</title>
@@ -9,15 +11,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg: #0E2A20;
-    --bg-alt: #143829;
-    --bg-alt2: #1B4432;
-    --copper: #C17A45;
-    --copper-light: #E2A76F;
-    --paper: #F2EDE2;
-    --ink: #201C16;
-    --silver: #B9C4BE;
-    --line: rgba(185,196,190,0.18);
+    --bg: #FFFFFF;
+    --bg-alt: #F4F5F7;
+    --bg-alt2: #E9ECEF;
+    --copper: #B4662F;
+    --copper-light: #9A5424;
+    --paper: #1B1F23;
+    --ink: #1B1F23;
+    --silver: #5B6670;
+    --line: rgba(27,31,35,0.14);
   }
   *{box-sizing:border-box; margin:0; padding:0;}
   body{
@@ -285,7 +287,7 @@
     *{transition:none !important;}
   }
 
-  :root{color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);}
+  :root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);}
   html{scroll-padding-top:env(safe-area-inset-top,0px);}
   header{top:env(safe-area-inset-top,0px);}
   body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--bg);z-index:30;}
@@ -316,10 +318,46 @@
     messagingSenderId: "155980637369",
     appId: "1:155980637369:web:b2162be7b352e7972e6768"
   };
-  if (window.FIREBASE_CONFIG) document.documentElement.classList.add('gated');
+  try { document.documentElement.dataset.theme = localStorage.getItem('rt-theme') || 'light'; } catch (e) { document.documentElement.dataset.theme = 'light'; }
+  try { document.documentElement.dataset.fs = localStorage.getItem('rt-fs') || 'normal'; } catch (e) {}
 </script>
 <style>
   .gated body > *:not(#authGate){display:none !important;}
+  html[data-theme="dark"]{color-scheme:dark;--bg:#111418;--bg-alt:#1A1F25;--bg-alt2:#232A32;--copper:#C17A45;--copper-light:#E2A76F;--paper:#F2F2F0;--ink:#F2F2F0;--silver:#A8B0B8;--line:rgba(255,255,255,0.14);}
+  #themeBtn{order:3;width:40px;height:40px;padding:0;display:inline-flex;align-items:center;justify-content:center;border-radius:50%;}
+  .tab-btn svg,#themeBtn svg,.btn svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
+  .btn svg{width:18px;height:18px;vertical-align:-4px;margin-right:8px;}
+  nav.tabs button{display:inline-flex;align-items:center;justify-content:center;gap:7px;}
+  .tab-btn{position:relative;}
+  #cartCount{position:absolute;top:3px;right:8px;margin:0;font-size:10px;padding:0 5px;min-width:16px;text-align:center;line-height:16px;}
+  @media (max-width:560px){nav.tabs button{flex-direction:column;gap:3px;font-size:11px;padding:8px 2px;}#cartCount{right:calc(50% - 22px);top:2px;}}
+  @media (max-width:560px){#themeBtn{order:1;margin-left:auto;}nav.tabs{order:2;}}
+  .acc-card{border:1px solid var(--line);background:var(--bg-alt);border-radius:3px;padding:20px;margin-bottom:20px;display:flex;flex-direction:column;gap:14px;}
+  .acc-card h3{color:var(--copper-light);font-size:16px;font-weight:600;}
+  .brand-wrap{display:flex;align-items:center;gap:12px;}
+  .burger{background:none;border:1px solid var(--line);color:var(--paper);width:40px;height:40px;border-radius:3px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;}
+  .burger svg,.drawer svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0;}
+  .drawer-backdrop{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:90;opacity:0;pointer-events:none;transition:opacity .25s;}
+  .drawer{position:fixed;top:0;bottom:0;left:0;width:min(86vw,340px);background:var(--bg);color:var(--paper);border-right:1px solid var(--line);z-index:95;transform:translateX(-100%);visibility:hidden;transition:transform .25s ease,visibility .25s;overflow-y:auto;padding:calc(16px + env(safe-area-inset-top,0px)) 18px calc(24px + env(safe-area-inset-bottom,0px));display:flex;flex-direction:column;gap:18px;}
+  body.drawer-open .drawer{transform:none;visibility:visible;}
+  body.drawer-open .drawer-backdrop{opacity:1;pointer-events:auto;}
+  .drawer-head{display:flex;justify-content:space-between;align-items:center;font-family:'Space Grotesk';font-size:18px;}
+  .drawer-head button{background:none;border:none;color:var(--paper);cursor:pointer;padding:6px;}
+  .drawer-user{border:1px solid var(--line);background:var(--bg-alt);padding:14px;border-radius:3px;font-size:14px;display:flex;flex-direction:column;gap:8px;}
+  .drawer h4{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--silver);font-weight:600;margin-bottom:8px;}
+  .drawer-nav{display:flex;flex-direction:column;}
+  .drawer-nav button,.drawer-nav a,.drawer-out{display:flex;align-items:center;gap:12px;padding:12px 10px;background:none;border:none;color:var(--paper);font:inherit;font-size:15px;text-align:left;border-radius:3px;cursor:pointer;text-decoration:none;width:100%;}
+  .drawer-nav button:hover,.drawer-nav a:hover,.drawer-out:hover{background:var(--bg-alt);}
+  .seg{display:flex;border:1px solid var(--line);border-radius:3px;overflow:hidden;margin-bottom:10px;}
+  .seg button{flex:1;padding:10px 6px;background:none;border:none;color:var(--silver);cursor:pointer;font:inherit;font-size:13px;}
+  .seg button.on{background:var(--copper);color:var(--bg);}
+  html[data-fs="large"] body{zoom:1.12;}
+  .view.active{animation:rtfade .25s ease;}
+  @keyframes rtfade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+  @media (prefers-reduced-motion:reduce){.view.active{animation:none;}.drawer,.drawer-backdrop{transition:none;}}
+  .legal{max-width:720px;padding:32px 0 100px;display:flex;flex-direction:column;gap:14px;color:var(--silver);font-size:15px;line-height:1.6;}
+  .legal h3{color:var(--paper);font-size:16px;margin-top:10px;}
+  .toast{position:fixed;left:50%;bottom:calc(80px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--paper);color:var(--bg);padding:10px 16px;border-radius:20px;font-size:13px;z-index:120;max-width:90vw;text-align:center;}
   #authGate{position:fixed;inset:0;z-index:100;background:var(--bg);overflow:auto;display:flex;align-items:center;justify-content:center;padding:calc(24px + env(safe-area-inset-top,0px)) 20px calc(24px + env(safe-area-inset-bottom,0px));}
   #authGate .box{width:100%;max-width:420px;display:flex;flex-direction:column;gap:14px;}
   #authGate h1{font-family:'Space Grotesk';font-size:26px;}
@@ -333,12 +371,13 @@
 
 <header>
   <div class="wrap nav-inner">
-    <div class="brand"><span class="dot"></span>ReTech - Yesunana</div>
+    <div class="brand-wrap"><button type="button" class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><div class="brand"><span class="dot"></span>ReTech - Yesunana</div></div>
     <nav class="tabs">
-      <button class="tab-btn active" data-view="accueil">Accueil</button>
-      <button class="tab-btn" data-view="signaler">Signaler</button>
-      <button class="tab-btn" data-view="boutique">Boutique</button>
-      <button class="tab-btn" data-view="panier">Panier<span id="cartCount">0</span></button>
+      <button class="tab-btn active" data-view="accueil" aria-label="Accueil"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg><span>Accueil</span></button>
+      <button class="tab-btn" data-view="signaler" aria-label="Signaler"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l10 18H2L12 3z"/><path d="M12 10v5"/><path d="M12 18v.5"/></svg><span>Signaler</span></button>
+      <button class="tab-btn" data-view="boutique" aria-label="Boutique"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6a3 3 0 016 0v2"/></svg><span>Boutique</span></button>
+      <button class="tab-btn" data-view="panier" aria-label="Panier"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.5 12h11L21 7H6"/></svg><span>Panier</span><span id="cartCount">0</span></button>
+      <button class="tab-btn" data-view="compte" aria-label="Compte"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg><span>Compte</span></button>
     </nav>
   </div>
 </header>
@@ -365,25 +404,8 @@
       <h1>Vos appareils cassés ont encore des pièces qui marchent.</h1>
       <p class="lede">ReTech collecte les appareils électroniques hors d'usage, teste chaque composant, et rend disponibles ceux qui fonctionnent encore pour réparer ou fabriquer d'autres appareils.</p>
       <div class="hero-ctas">
-        <button class="btn btn-primary" onclick="showView('signaler')">Signaler un appareil</button>
-        <button class="btn btn-ghost" onclick="showView('boutique')">Voir les pièces disponibles</button>
-      </div>
-    </div>
-  </div>
-
-  <div class="stats">
-    <div class="wrap stats-grid">
-      <div>
-        <div class="stat-num">8 200 t</div>
-        <div class="stat-label">de déchets électroniques produits chaque année au Bénin (2019)</div>
-      </div>
-      <div>
-        <div class="stat-num">&gt;80%</div>
-        <div class="stat-label">de ces déchets ne sont traités dans aucune filière appropriée</div>
-      </div>
-      <div>
-        <div class="stat-num">20-50 M t</div>
-        <div class="stat-label">de déchets électroniques produits chaque année dans le monde</div>
+        <button class="btn btn-primary" onclick="showView('signaler')"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l10 18H2L12 3z"/><path d="M12 10v5"/><path d="M12 18v.5"/></svg>Signaler un appareil</button>
+        <button class="btn btn-ghost" onclick="showView('boutique')"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6a3 3 0 016 0v2"/></svg>Voir les pièces disponibles</button>
       </div>
     </div>
   </div>
@@ -414,29 +436,6 @@
           <div class="num">4</div>
           <h3>Vente</h3>
           <p>Les pièces valides sont mises en vente pour réparer ou fabriquer.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="audience">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Pour qui</h2>
-        <p>Toute personne qui a besoin de pièces électroniques fonctionnelles, à moindre coût.</p>
-      </div>
-      <div class="aud-grid">
-        <div class="aud-card">
-          <h3>Étudiants en électronique</h3>
-          <p>Des composants à faible coût pour apprendre, réparer ou prototyper.</p>
-        </div>
-        <div class="aud-card">
-          <h3>Réparateurs &amp; techniciens</h3>
-          <p>Des pièces parfois rares, difficiles à trouver neuves sur le marché local.</p>
-        </div>
-        <div class="aud-card">
-          <h3>Créateurs de prototypes</h3>
-          <p>Un accès rapide à des modules et composants testés pour vos projets.</p>
         </div>
       </div>
     </div>
@@ -599,20 +598,72 @@
 
 <section class="view" id="panier">
   <div class="page-head"><div class="wrap"><h1>Mon panier</h1><p>Envoyez votre commande par WhatsApp : nous confirmons le prix et la disponibilité, puis vous récupérez ou êtes livré.</p></div></div>
-  <div class="wrap" style="padding:32px 0 100px"><div id="cartList"></div><button class="btn btn-primary" id="orderBtn" style="margin-top:22px">Commander sur WhatsApp</button></div>
+  <div class="wrap" style="padding:32px 0 100px"><div id="cartList"></div><button class="btn btn-primary" id="orderBtn" style="margin-top:22px">Commander sur WhatsApp</button>
+    <p class="submit-note" id="orderStatus" style="margin-top:12px"></p></div>
+</section>
+
+<div class="drawer-backdrop" id="drawerBackdrop"></div>
+<aside class="drawer" id="drawer" aria-hidden="true" aria-label="Menu du site">
+  <div class="drawer-head"><span>Menu</span><button type="button" id="drawerClose" aria-label="Fermer le menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 5l14 14M19 5L5 19"/></svg></button></div>
+  <div class="drawer-user" id="drawerUser"></div>
+  <nav class="drawer-nav">
+    <button type="button" data-go="accueil"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>Accueil</button>
+    <button type="button" data-go="signaler"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l10 18H2L12 3z"/><path d="M12 10v5"/><path d="M12 18v.5"/></svg>Signaler un appareil</button>
+    <button type="button" data-go="boutique"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6a3 3 0 016 0v2"/></svg>Boutique</button>
+    <button type="button" data-go="panier"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.5 12h11L21 7H6"/></svg>Panier</button>
+    <button type="button" data-go="compte"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>Mon compte</button>
+  </nav>
+  <div>
+    <h4>Paramètres</h4>
+    <div class="seg" data-setting="theme"><button type="button" data-v="light">Clair</button><button type="button" data-v="dark">Sombre</button></div>
+    <div class="seg" data-setting="fs"><button type="button" data-v="normal">Texte normal</button><button type="button" data-v="large">Grand texte</button></div>
+  </div>
+  <nav class="drawer-nav">
+    <h4>Informations</h4>
+    <button type="button" data-go="infos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/></svg>Confidentialité et sécurité</button>
+    <a id="drawerWa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 01-11.5 7.2L3 21l1.8-5.5A8 8 0 1121 12z"/></svg>Nous contacter sur WhatsApp</a>
+  </nav>
+  <button type="button" class="drawer-out hide" id="drawerOut"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 4H5v16h4"/><path d="M16 8l4 4-4 4"/><path d="M20 12H9"/></svg>Se déconnecter</button>
+</aside>
+
+<section class="view" id="infos">
+  <div class="page-head"><div class="wrap"><h1>Confidentialité et sécurité</h1><p>Ce que ReTech enregistre, pourquoi, et comment c'est protégé.</p></div></div>
+  <div class="wrap legal">
+    <h3>Données enregistrées</h3>
+    <p>Quand vous créez un compte, nous gardons votre nom, votre téléphone et votre e-mail. Quand vous signalez un appareil ou passez une commande, nous gardons les informations que vous remplissez (type d'appareil, quantité, état, lieu).</p>
+    <h3>À quoi elles servent</h3>
+    <p>Uniquement à vous contacter, organiser la collecte, préparer vos commandes et estimer la valeur de vos appareils. Elles ne sont pas revendues.</p>
+    <h3>Qui peut les voir</h3>
+    <p>Vous voyez vos propres données dans l'espace Compte. Aucun autre client ne peut les lire : l'accès est limité par des règles de sécurité côté serveur. Seule l'équipe ReTech y accède pour traiter vos demandes.</p>
+    <h3>Mot de passe</h3>
+    <p>Votre mot de passe est géré par Google Firebase. ReTech ne peut pas le voir. Nous ne vous le demanderons jamais, ni par WhatsApp ni par appel.</p>
+    <h3>Supprimer vos données</h3>
+    <p>Écrivez-nous sur WhatsApp et nous supprimons votre compte et vos demandes.</p>
+  </div>
+</section>
+
+<section class="view" id="compte">
+  <div class="page-head"><div class="wrap"><h1>Mon compte</h1><p>Vos informations, vos signalements et vos commandes.</p></div></div>
+  <div class="wrap" style="padding:32px 0 100px" id="accountBox"><p class="empty">Espace compte indisponible pour le moment.</p></div>
 </section>
 
 <a class="wa-float" id="waFloat" target="_blank" rel="noopener">WhatsApp</a>
 
 <script>
   const WHATSAPP_NUMBER = '22961909361'; // ex. '22997000000' (229 + numéro, sans + ni espaces)
+  const PROTECTED = ['signaler', 'panier', 'compte']; // pages qui demandent d'abord une connexion
   const ENABLE_PHOTO_AI = false; // passer à true quand le backend /api/evaluer-photo existe
   function showView(view){
+    if (PROTECTED.includes(view) && window.FIREBASE_CONFIG && !(window.rtIsAuthed && window.rtIsAuthed())) {
+      if (window.rtRequireAuth) window.rtRequireAuth(() => showView(view)); else toast('Connexion en cours de chargement… réessayez dans un instant.');
+      return;
+    }
     document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
     document.getElementById(view).classList.add('active');
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.view === view));
     window.scrollTo({top:0, behavior:'instant'});
     try{ if(location.hash!=='#'+view) history.replaceState(null,'','#'+view); }catch(e){}
+    if (view === 'compte' && window.rtRenderAccount) window.rtRenderAccount();
   }
   document.querySelectorAll('.tab-btn').forEach(btn=>{
     btn.addEventListener('click', () => showView(btn.dataset.view));
@@ -639,9 +690,12 @@
       "Estimation indicative : " + g('estimateValue').textContent,
       "(Je joins la photo dans cette conversation)"
     ];
-    g('confirmBox').classList.add('show');
-    if (window.rtSave) window.rtSave('signalements', {nom:g('nom').value, tel:g('tel').value, ville:g('ville').value, categorie:d.cat, typeAppareil:d.type, marque:g('marque').value, poids:d.poids, nbPieces:d.nb, forme:d.forme, fonctionnement:d.fonct, degats:d.degats, contient:d.contient, remise:g('remise').value, prixSouhaite:Number(g('prix').value)||null, description:g('desc').value, estimationMin:r.lo, estimationMax:r.hi});
-    openWA(lines.join('\n'));
+    needAuth(() => {
+      if (window.rtSave) window.rtSave('signalements', {nom:g('nom').value, tel:g('tel').value, ville:g('ville').value, categorie:d.cat, typeAppareil:d.type, marque:g('marque').value, poids:d.poids, nbPieces:d.nb, forme:d.forme, fonctionnement:d.fonct, degats:d.degats, contient:d.contient, remise:g('remise').value, prixSouhaite:Number(g('prix').value)||null, description:g('desc').value, estimationMin:r.lo, estimationMax:r.hi});
+      const url = waUrl(lines.join('\n'));
+      g('confirmBox').innerHTML = 'Signalement prêt. Envoyez-le sur WhatsApp (avec la photo) pour finaliser :<br><a class="btn btn-primary" style="margin-top:10px;display:inline-block" target="_blank" rel="noopener" href="' + url + '">Ouvrir WhatsApp</a>';
+      g('confirmBox').classList.add('show');
+    });
   }
 
   // ---- Estimation indicative ----
@@ -805,7 +859,7 @@
       `;
       const btn = card.querySelector('.buy-btn');
       if (cart[p.name]) { btn.textContent = 'Ajouté'; btn.classList.add('added'); }
-      btn.addEventListener('click', () => { addToCart(p.name); btn.textContent = 'Ajouté'; btn.classList.add('added'); });
+      btn.addEventListener('click', () => needAuth(() => { addToCart(p.name); btn.textContent = 'Ajouté'; btn.classList.add('added'); }));
       grid.appendChild(card);
     });
   }
@@ -838,23 +892,95 @@
   function renderCart(){
     const list = document.getElementById('cartList');
     const names = Object.keys(cart);
-    document.getElementById('cartCount').textContent = names.reduce((n, k) => n + cart[k], 0);
+    const total = names.reduce((n, k) => n + cart[k], 0);
+    const cc = document.getElementById('cartCount'); cc.textContent = total; cc.style.display = total ? '' : 'none';
     document.getElementById('orderBtn').style.display = names.length ? 'inline-block' : 'none';
     if (!names.length){ list.innerHTML = '<p class="empty">Votre panier est vide. Parcourez la boutique pour ajouter des pièces.</p>'; return; }
     list.innerHTML = names.map((n, i) => `<div class="cart-item"><span>${n}</span><span class="qty"><button data-i="${i}" data-d="-1">−</button><b>${cart[n]}</b><button data-i="${i}" data-d="1">+</button></span></div>`).join('');
     list.querySelectorAll('button').forEach(b => b.addEventListener('click', () => changeQty(names[b.dataset.i], +b.dataset.d)));
   }
-  document.getElementById('orderBtn').addEventListener('click', () => {
+  document.getElementById('orderBtn').addEventListener('click', () => needAuth(() => {
     if (window.rtSave) window.rtSave('commandes', {articles: Object.keys(cart).map(n => ({nom:n, quantite:cart[n]}))});
     const lines = Object.keys(cart).map(n => `• ${n} × ${cart[n]}`).join('\n');
-    openWA('Bonjour ReTech, je souhaite commander :\n' + lines + '\nMerci de me confirmer le prix et la disponibilité.');
-  });
+    const url = waUrl('Bonjour ReTech, je souhaite commander :\n' + lines + '\nMerci de me confirmer le prix et la disponibilité.');
+    document.getElementById('orderStatus').innerHTML = 'Commande prête. <a target="_blank" rel="noopener" href="' + url + '" style="color:var(--copper-light)">Ouvrir WhatsApp pour l\'envoyer</a>';
+    window.open(url, '_blank', 'noopener');
+  }));
   document.getElementById('search').addEventListener('input', () => renderParts(activeCat()));
   function routeFromHash(){
     const v = location.hash.slice(1), el = document.getElementById(v);
+    if (PROTECTED.includes(v) && window.FIREBASE_CONFIG && !(window.rtIsAuthed && window.rtIsAuthed())) return;
     if (el && el.classList.contains('view')) showView(v);
   }
   window.addEventListener('hashchange', routeFromHash);
+
+  function needAuth(fn){
+    if (window.rtRequireAuth) window.rtRequireAuth(fn);
+    else if (window.FIREBASE_CONFIG) toast('Connexion en cours de chargement… réessayez dans un instant.');
+    else fn();
+  }
+  function toast(msg){
+    const t = document.createElement('div'); t.className = 'toast'; t.textContent = msg;
+    document.body.appendChild(t); setTimeout(() => t.remove(), 3500);
+  }
+  function waUrl(t){ return 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(t); }
+  const ICON_SUN = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M5 5l2 2M17 17l2 2M19 5l-2 2M7 17l-2 2"/></svg>', ICON_MOON = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 13A9 9 0 1111 3a7 7 0 0010 10z"/></svg>';
+  const themeBtn = document.createElement('button');
+  themeBtn.id = 'themeBtn'; themeBtn.className = 'logout';
+  function applyTheme(t){
+    document.documentElement.dataset.theme = t;
+    themeBtn.innerHTML = t === 'dark' ? ICON_SUN : ICON_MOON;
+    themeBtn.setAttribute('aria-label', t === 'dark' ? 'Passer en mode clair' : 'Passer en mode sombre');
+    themeBtn.title = themeBtn.getAttribute('aria-label');
+    try { localStorage.setItem('rt-theme', t); } catch (e) {}
+    markSeg();
+  }
+  themeBtn.addEventListener('click', () => applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
+  document.querySelector('.nav-inner').appendChild(themeBtn);
+  applyTheme(document.documentElement.dataset.theme || 'light');
+
+function markSeg(){
+    const root = document.documentElement;
+    document.querySelectorAll('#drawer .seg').forEach(sg => {
+      const cur = sg.dataset.setting === 'theme' ? root.dataset.theme : (root.dataset.fs || 'normal');
+      sg.querySelectorAll('button').forEach(b => b.classList.toggle('on', b.dataset.v === cur));
+    });
+  }
+  function setDrawer(open){
+    document.body.classList.toggle('drawer-open', open);
+    document.getElementById('drawer').setAttribute('aria-hidden', String(!open));
+    document.getElementById('burger').setAttribute('aria-expanded', String(open));
+  }
+  document.getElementById('burger').addEventListener('click', () => setDrawer(true));
+  document.getElementById('drawerClose').addEventListener('click', () => setDrawer(false));
+  document.getElementById('drawerBackdrop').addEventListener('click', () => setDrawer(false));
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') setDrawer(false); });
+  document.querySelectorAll('#drawer [data-go]').forEach(b => b.addEventListener('click', () => { setDrawer(false); showView(b.dataset.go); }));
+  document.querySelectorAll('#drawer .seg button').forEach(b => b.addEventListener('click', () => {
+    if (b.parentNode.dataset.setting === 'theme') applyTheme(b.dataset.v);
+    else { document.documentElement.dataset.fs = b.dataset.v; try { localStorage.setItem('rt-fs', b.dataset.v); } catch (e) {} markSeg(); }
+  }));
+  document.getElementById('drawerWa').href = waUrl('Bonjour ReTech');
+  document.getElementById('drawerOut').addEventListener('click', () => { setDrawer(false); if (window.rtSignOut) window.rtSignOut(); showView('accueil'); });
+  window.rtOnUser = u => {
+    if (u) routeFromHash();
+    else { const act = document.querySelector('.view.active'); if (act && PROTECTED.includes(act.id)) showView('accueil'); }
+    const box = document.getElementById('drawerUser'), out = document.getElementById('drawerOut');
+    box.textContent = '';
+    if (u) {
+      const n = document.createElement('b'); n.textContent = u.displayName || 'Mon compte';
+      const m = document.createElement('span'); m.className = 'empty'; m.textContent = u.email || '';
+      box.append(n, m);
+    } else {
+      const t = document.createElement('span'); t.textContent = "Vous n'êtes pas connecté.";
+      const b = document.createElement('button'); b.type = 'button'; b.className = 'btn btn-primary'; b.textContent = 'Se connecter / Créer un compte';
+      b.addEventListener('click', () => { setDrawer(false); needAuth(() => showView('compte')); });
+      box.append(t, b);
+    }
+    out.classList.toggle('hide', !u);
+  };
+  window.rtOnUser(null);
+  markSeg();
 
   renderParts('tous');
   renderCart();
@@ -886,7 +1012,9 @@ if (window.FIREBASE_CONFIG) {
     <div id="authMsg"></div>
     <button type="button" class="link" id="aToggle">Pas de compte ? Créer un compte</button>
     <button type="button" class="link" id="aForgot">Mot de passe oublié ?</button>
+    <button type="button" class="link" id="aClose">← Retour au site</button>
   </div>`;
+  gate.classList.add('hide');
   document.body.appendChild(gate);
 
   function setMode(m){
@@ -930,15 +1058,54 @@ if (window.FIREBASE_CONFIG) {
     } catch (e) { fail(e); }
   };
 
-  const out = document.createElement('button');
-  out.className = 'logout'; out.textContent = 'Déconnexion'; out.hidden = true;
-  out.onclick = () => A.signOut(auth);
-  document.querySelector('.nav-inner').appendChild(out);
+  let pending = null;
+  $('aClose').onclick = () => { pending = null; gate.classList.add('hide'); };
+  window.rtRequireAuth = fn => { if (auth.currentUser) fn(); else { pending = fn; setMode('login'); gate.classList.remove('hide'); } };
+  const esc = t => String(t ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+  async function renderAccount(){
+    const box = $('accountBox'); if (!box) return;
+    const u = auth.currentUser;
+    if (!u) {
+      box.innerHTML = '<p class="empty">Connectez-vous pour accéder à votre espace : informations, signalements et commandes.</p><button class="btn btn-primary" id="accLogin" style="margin-top:16px">Se connecter / Créer un compte</button>';
+      $('accLogin').onclick = () => window.rtRequireAuth(renderAccount);
+      return;
+    }
+    let prof = {};
+    try { const sn = await F.getDoc(F.doc(db, 'users', u.uid)); if (sn.exists()) prof = sn.data(); } catch (e) {}
+    box.innerHTML = `<div class="acc-card"><h3>Mes informations</h3>
+      <div class="field"><label for="accNom">Nom</label><input id="accNom"></div>
+      <div class="field"><label for="accTel">Téléphone</label><input id="accTel" type="tel"></div>
+      <div class="field"><label for="accMail">E-mail</label><input id="accMail" disabled></div>
+      <div style="display:flex;gap:10px;flex-wrap:wrap"><button class="btn btn-primary" id="accSave">Enregistrer</button><button class="btn btn-ghost" id="accOut">Se déconnecter</button></div>
+      <p class="submit-note" id="accMsg"></p></div>
+      <div class="acc-card"><h3>Mes signalements</h3><div id="accSig" class="empty">Chargement…</div></div>
+      <div class="acc-card"><h3>Mes commandes</h3><div id="accCmd" class="empty">Chargement…</div></div>`;
+    $('accNom').value = prof.nom || u.displayName || ''; $('accTel').value = prof.tel || ''; $('accMail').value = u.email || '';
+    $('accOut').onclick = () => A.signOut(auth);
+    $('accSave').onclick = async () => {
+      try { await F.setDoc(F.doc(db, 'users', u.uid), {nom: $('accNom').value.trim(), tel: $('accTel').value.trim()}, {merge: true}); $('accMsg').textContent = 'Informations enregistrées.'; }
+      catch (e) { $('accMsg').textContent = 'Enregistrement impossible.'; }
+    };
+    const dt = r => r.createdAt ? new Date(r.createdAt.seconds * 1000).toLocaleDateString('fr-FR') : '';
+    const list = async (col, el, fmt) => {
+      try {
+        const q = await F.getDocs(F.query(F.collection(db, col), F.where('uid', '==', u.uid)));
+        const rows = q.docs.map(d => d.data()).sort((a, b) => ((b.createdAt && b.createdAt.seconds) || 0) - ((a.createdAt && a.createdAt.seconds) || 0));
+        el.className = '';
+        el.innerHTML = rows.length ? rows.map(r => '<div class="cart-item"><span>' + fmt(r) + '</span></div>').join('') : '<p class="empty">Aucun pour le moment.</p>';
+      } catch (e) { el.textContent = 'Impossible de charger.'; }
+    };
+    list('signalements', $('accSig'), r => dt(r) + ' — ' + esc(r.categorie) + (r.categorie === 'appareils' ? ' (' + esc(r.typeAppareil) + ')' : '') + ' — estimation ' + esc(r.estimationMin) + '-' + esc(r.estimationMax) + ' FCFA');
+    list('commandes', $('accCmd'), r => dt(r) + ' — ' + (r.articles || []).map(a => esc(a.nom) + ' ×' + esc(a.quantite)).join(', '));
+  }
+  window.rtRenderAccount = renderAccount;
+  window.rtSignOut = () => A.signOut(auth);
+  window.rtIsAuthed = () => !!auth.currentUser;
 
   A.onAuthStateChanged(auth, async u => {
-    document.documentElement.classList.toggle('gated', !u);
-    gate.classList.toggle('hide', !!u);
-    out.hidden = !u;
+    if (window.rtOnUser) window.rtOnUser(u);
+    if (u) { gate.classList.add('hide'); if (pending) { const f = pending; pending = null; f(); } }
+    renderAccount();
     if (!u) return;
     if (!$('nom').value) $('nom').value = u.displayName || '';
     try {
