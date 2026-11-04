@@ -298,6 +298,35 @@
   .empty{color:var(--silver);}
   .wa-float{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:25;background:#25D366;color:#0b2a1a;font-weight:600;font-size:14px;padding:12px 18px;border-radius:30px;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.35);}
   @media (max-width:560px){.nav-inner{flex-wrap:wrap;gap:10px;}nav.tabs{width:100%;}nav.tabs button{flex:1;padding:9px 4px;}}
+
+  .chips{display:flex;flex-wrap:wrap;gap:8px;}
+  .chips label{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:3px;padding:10px 12px;font-size:14px;color:var(--paper);background:var(--bg-alt);cursor:pointer;}
+  .chips label:has(input:checked){border-color:var(--copper-light);color:var(--copper-light);}
+  .chips input{accent-color:var(--copper-light);}
+  .step-title{font-family:'Space Grotesk';font-size:15px;font-weight:600;color:var(--copper-light);margin-top:8px;border-top:1px solid var(--line);padding-top:16px;}
+  .hide{display:none !important;}
+</style>
+<script>
+  /* Après création du projet Firebase, remplacez null par l'objet firebaseConfig (voir instructions). */
+  window.FIREBASE_CONFIG = {
+    apiKey: "AIzaSyAigoifinZBPGYYlXMABu3BoIIFgzsY12Y",
+    authDomain: "retech-b3395.firebaseapp.com",
+    projectId: "retech-b3395",
+    storageBucket: "retech-b3395.firebasestorage.app",
+    messagingSenderId: "155980637369",
+    appId: "1:155980637369:web:b2162be7b352e7972e6768"
+  };
+  if (window.FIREBASE_CONFIG) document.documentElement.classList.add('gated');
+</script>
+<style>
+  .gated body > *:not(#authGate){display:none !important;}
+  #authGate{position:fixed;inset:0;z-index:100;background:var(--bg);overflow:auto;display:flex;align-items:center;justify-content:center;padding:calc(24px + env(safe-area-inset-top,0px)) 20px calc(24px + env(safe-area-inset-bottom,0px));}
+  #authGate .box{width:100%;max-width:420px;display:flex;flex-direction:column;gap:14px;}
+  #authGate h1{font-family:'Space Grotesk';font-size:26px;}
+  #authGate p{color:var(--silver);font-size:14px;}
+  #authGate .link{background:none;border:none;color:var(--copper-light);font-size:13px;cursor:pointer;text-align:left;padding:2px 0;}
+  #authMsg{font-size:13px;color:#ff8a7a;min-height:18px;}
+  .logout{background:none;border:1px solid var(--line);color:var(--silver);padding:7px 12px;border-radius:3px;font-size:12px;cursor:pointer;}
 </style>
 </head>
 <body>
@@ -440,38 +469,64 @@
         </div>
       </div>
 
-      <div class="row-2">
-        <div class="field">
-          <label for="ville">Ville / Quartier</label>
-          <input type="text" id="ville" placeholder="Ex : Cotonou, Akpakpa" required>
-        </div>
-        <div class="field">
-          <label for="type">Type d'appareil</label>
-          <select id="type">
-            <option>Radio</option>
-            <option>Chargeur</option>
-            <option>Alimentation / bloc secteur</option>
-            <option>Carte électronique</option>
-            <option>Téléviseur</option>
-            <option>Autre</option>
-          </select>
-        </div>
+      <div class="field">
+        <label for="ville">Ville / Quartier</label>
+        <input type="text" id="ville" placeholder="Ex : Abomey-Calavi, Godomey" required>
       </div>
 
+      <div class="step-title">Étape 1 — Que vendez-vous ?</div>
+      <div class="field"><div class="chips" id="catChips">
+        <label><input type="radio" name="cat" value="cartes_meres"> Cartes mères PC</label>
+        <label><input type="radio" name="cat" value="industrielles"> Cartes industrielles</label>
+        <label><input type="radio" name="cat" value="plaquettes"> Plaquettes / cartes diverses</label>
+        <label><input type="radio" name="cat" value="composants"> Composants triés</label>
+        <label><input type="radio" name="cat" value="appareils"> Appareils complets</label>
+        <label><input type="radio" name="cat" value="autre"> Autre</label>
+      </div></div>
+      <div class="field hide" id="typeWrap">
+        <label for="type">Quel appareil ?</label>
+        <select id="type"></select>
+      </div>
+      <div class="field">
+        <label for="marque">Marque / modèle / précisions (optionnel)</label>
+        <input type="text" id="marque" placeholder="Ex : Dell Optiplex, carte d'onduleur, lot de condensateurs">
+      </div>
+
+      <div class="step-title">Étape 2 — Quelle quantité ?</div>
       <div class="row-2">
-        <div class="field">
-          <label for="etat">État général</label>
-          <select id="etat">
-            <option value="fonctionnel">Fonctionne encore</option>
-            <option value="partiel">Partiellement fonctionnel</option>
-            <option value="horsusage">Hors d'usage</option>
-            <option value="incomplet">Pièces manquantes / incomplet</option>
-          </select>
-        </div>
-        <div class="field">
-          <label for="poids">Poids estimé en kg (optionnel)</label>
-          <input type="number" id="poids" min="0" step="0.1" placeholder="Ex : 1.5">
-        </div>
+        <div class="field"><label for="poids">Poids estimé (kg)</label><input type="number" id="poids" min="0" step="0.1" placeholder="Ex : 5"></div>
+        <div class="field"><label for="nb">OU nombre de pièces</label><input type="number" id="nb" min="0" step="1" placeholder="Ex : 12"></div>
+      </div>
+
+      <div class="step-title">Étape 3 — Quel est l'état ?</div>
+      <div class="field" id="formeWrap"><div class="chips">
+        <label><input type="radio" name="forme" value="nues" checked> Cartes nues et propres (sans radiateur alu ni batterie)</label>
+        <label><input type="radio" name="forme" value="assemblees"> Appareils encore assemblés (à démonter)</label>
+        <label><input type="radio" name="forme" value="melange"> Un mélange des deux</label>
+      </div></div>
+      <div class="row-2">
+        <div class="field"><label for="fonct">Fonctionnement</label>
+          <select id="fonct"><option value="fonctionne">Fonctionne encore</option><option value="partiel" selected>Partiellement / je ne sais pas</option><option value="hs">Hors d'usage</option></select></div>
+        <div class="field"><label for="remise">Remise</label>
+          <select id="remise"><option>Je dépose chez vous</option><option>Vous venez récupérer</option></select></div>
+      </div>
+      <div class="field"><label>Dégâts visibles</label><div class="chips">
+        <label><input type="checkbox" name="degat" value="brule"> Brûlé</label>
+        <label><input type="checkbox" name="degat" value="humide"> Humide / rouillé</label>
+        <label><input type="checkbox" name="degat" value="casse"> Cassé / pièces manquantes</label>
+      </div></div>
+      <div class="field"><label>Cela contient (cochez ce que vous voyez)</label><div class="chips">
+        <label><input type="checkbox" name="contient" value="cpu"> Processeur / mémoire (RAM)</label>
+        <label><input type="checkbox" name="contient" value="dores"> Connecteurs dorés</label>
+        <label><input type="checkbox" name="contient" value="radiateur"> Radiateur alu / ventilateur</label>
+        <label><input type="checkbox" name="contient" value="batterie"> Batterie / pile</label>
+        <label><input type="checkbox" name="contient" value="gros"> Gros condensateurs / transformateur</label>
+        <label><input type="checkbox" name="contient" value="ecran"> Écran / dalle</label>
+        <label><input type="checkbox" name="contient" value="cuivre"> Moteur / bobines / câbles cuivre</label>
+      </div></div>
+      <div class="field">
+        <label for="prix">Prix souhaité en FCFA (optionnel)</label>
+        <input type="number" id="prix" min="0" step="50" placeholder="Ex : 10000">
       </div>
 
       <div class="field">
@@ -489,10 +544,12 @@
         <div class="analyse-status" id="analyseStatus"></div>
       </div>
 
+      <button type="button" class="btn btn-ghost" id="estimBtn">Obtenir mon estimation indicative</button>
       <div class="estimate-box" id="estimateBox">
         <span class="estimate-label">Valeur estimée (indicative)</span>
         <span class="estimate-value" id="estimateValue">—</span>
       </div>
+      <p class="submit-note" id="estimateNote">Estimation provisoire : le prix final est confirmé après examen des pièces.</p>
 
       <div>
         <button type="submit" class="btn btn-primary">Envoyer le signalement</button>
@@ -508,7 +565,8 @@
       <h3>Ce qui est accepté</h3>
       <ul>
         <li>Radios, chargeurs, blocs d'alimentation</li>
-        <li>Cartes électroniques et circuits imprimés</li>
+        <li>Cartes mères PC, cartes industrielles, plaquettes de tout genre</li>
+        <li>Composants triés (condensateurs, connecteurs, puces…)</li>
         <li>Téléviseurs, ordinateurs, périphériques</li>
         <li>Tout appareil électronique hors d'usage, même incomplet</li>
       </ul>
@@ -562,77 +620,84 @@
 
   function handleReport(e){
     e.preventDefault();
-    const g = id => document.getElementById(id);
-    const msg = `Signalement d'appareil ReTech
-Nom : ${g('nom').value}
-Téléphone : ${g('tel').value}
-Lieu : ${g('ville').value}
-Appareil : ${g('type').value}
-État : ${g('etat').selectedOptions[0].text}
-Poids : ${g('poids').value || 'non précisé'} kg
-Description : ${g('desc').value || '-'}
-Valeur estimée : ${g('estimateValue').textContent}
-(Je joins la photo dans cette conversation)`;
+    const d = collect(), r = calc(d), g = id => document.getElementById(id);
+    showEstimate(r);
+    if (r.err) { g('estimBtn').scrollIntoView({behavior:'smooth', block:'center'}); return; }
+    const L = {cartes_meres:'Cartes mères PC', industrielles:'Cartes industrielles', plaquettes:'Plaquettes / cartes diverses', composants:'Composants triés', appareils:'Appareils complets', autre:'Autre'};
+    const F = {nues:'Cartes nues et propres', assemblees:'Appareils assemblés (à démonter)', melange:'Mélange'};
+    const O = {fonctionne:'Fonctionne', partiel:'Partiel / inconnu', hs:"Hors d'usage"};
+    const lines = [
+      "Signalement ReTech",
+      "Nom : " + g('nom').value, "Téléphone : " + g('tel').value, "Lieu : " + g('ville').value,
+      "Catégorie : " + L[d.cat] + (d.cat === 'appareils' ? " (" + d.type + ")" : ''),
+      "Précisions : " + (g('marque').value || '-'),
+      "Quantité : " + (d.poids ? d.poids + ' kg' : '') + (d.poids && d.nb ? ' / ' : '') + (d.nb ? d.nb + ' pièces' : ''),
+      "Forme : " + F[d.forme], "Fonctionnement : " + O[d.fonct],
+      "Dégâts : " + (d.degats.join(', ') || 'aucun'), "Contient : " + (d.contient.join(', ') || '-'),
+      "Remise : " + g('remise').value, "Prix souhaité : " + (g('prix').value ? g('prix').value + ' FCFA' : '-'),
+      "Description : " + (g('desc').value || '-'),
+      "Estimation indicative : " + g('estimateValue').textContent,
+      "(Je joins la photo dans cette conversation)"
+    ];
     g('confirmBox').classList.add('show');
-    openWA(msg);
+    if (window.rtSave) window.rtSave('signalements', {nom:g('nom').value, tel:g('tel').value, ville:g('ville').value, categorie:d.cat, typeAppareil:d.type, marque:g('marque').value, poids:d.poids, nbPieces:d.nb, forme:d.forme, fonctionnement:d.fonct, degats:d.degats, contient:d.contient, remise:g('remise').value, prixSouhaite:Number(g('prix').value)||null, description:g('desc').value, estimationMin:r.lo, estimationMax:r.hi});
+    openWA(lines.join('\n'));
   }
 
-  // ---- Estimation indicative de la valeur du déchet électronique ----
-  // Valeur de base par type d'appareil (FCFA), correspondant à un appareil
-  // "fonctionnel" moyen. Calibrée pour que le résultat final reste dans la
-  // fourchette réelle du marché : 100 à 3000 FCFA.
-  const PRIX_MIN = 100;
-  const PRIX_MAX = 3000;
-
-  const baseValue = {
-    'Radio': 1200,
-    'Chargeur': 500,
-    'Alimentation / bloc secteur': 900,
-    'Carte électronique': 1800,
-    'Téléviseur': 2800,
-    'Autre': 700
+  // ---- Estimation indicative ----
+  // VALEURS DE DÉPART À CALIBRER avec vos vrais prix d'achat (FCFA).
+  const CFG = {
+    kg:    {cartes_meres:1500, industrielles:2500, plaquettes:900, composants:3000, appareils:150, autre:300},
+    piece: {cartes_meres:300, industrielles:800, plaquettes:150, composants:20, autre:100},
+    appareil: {'Radio':600, 'Téléviseur LCD/LED':1500, 'Téléviseur à tube':800, 'Ordinateur portable':2500,
+      'Ordinateur de bureau (unité centrale)':1500, "Écran d'ordinateur":700, 'Décodeur / récepteur':500,
+      'Chargeur / bloc secteur':200, 'Onduleur / stabilisateur':1200, 'Imprimante':600, 'Téléphone':400,
+      'Ampli / chaîne hi-fi':1000, 'Autre appareil':500}
   };
-
-  // Coefficient selon l'état déclaré
-  const etatFactor = {
-    fonctionnel: 1,
-    partiel: 0.55,
-    horsusage: 0.25,
-    incomplet: 0.12
-  };
-
-  // Valeur additionnelle indicative par kg (matériaux récupérables : cuivre,
-  // aluminium, plastiques triables), utilisée en complément de la base.
-  const prixParKg = 150;
-
-  function clamp(valeur){
-    return Math.min(PRIX_MAX, Math.max(PRIX_MIN, valeur));
+  const typeSel = document.getElementById('type');
+  Object.keys(CFG.appareil).forEach(k => { const o = document.createElement('option'); o.textContent = k; typeSel.appendChild(o); });
+  const val = id => document.getElementById(id).value;
+  function collect(){
+    const one = n => { const i = document.querySelector('input[name="' + n + '"]:checked'); return i ? i.value : null; };
+    const all = n => [...document.querySelectorAll('input[name="' + n + '"]:checked')].map(i => i.value);
+    return {cat: one('cat'), type: val('type'), poids: parseFloat(val('poids')) || 0, nb: parseInt(val('nb')) || 0,
+      forme: one('forme'), fonct: val('fonct'), degats: all('degat'), contient: all('contient')};
   }
-
-  function updateEstimate(){
-    const type = document.getElementById('type').value;
-    const etat = document.getElementById('etat').value;
-    const poids = parseFloat(document.getElementById('poids').value) || 0;
-
-    const base = baseValue[type] ?? baseValue['Autre'];
-    const factor = etatFactor[etat] ?? 1;
-
-    const valeurAppareil = base * factor;
-    const valeurMatiere = poids * prixParKg;
-    const estimation = clamp(Math.round(valeurAppareil + valeurMatiere));
-
-    // Fourchette +/-20% pour rester honnête sur le caractère indicatif,
-    // toujours contenue dans les bornes 100-3000 FCFA
-    const bas = clamp(Math.round(estimation * 0.8));
-    const haut = clamp(Math.round(estimation * 1.2));
-
-    document.getElementById('estimateValue').textContent = `${bas} - ${haut} FCFA`;
+  function calc(d){
+    if (!d.cat) return {err: "Choisissez d'abord ce que vous vendez (étape 1)."};
+    if (!d.poids && !d.nb) return {err: "Indiquez un poids ou un nombre de pièces (étape 2)."};
+    const app = d.cat === 'appareils';
+    let base, precis = true;
+    if (app) { base = d.nb ? d.nb * CFG.appareil[d.type] : d.poids * CFG.kg.appareils; precis = !!d.nb; }
+    else { base = d.poids ? d.poids * CFG.kg[d.cat] : d.nb * CFG.piece[d.cat]; precis = !!d.poids; }
+    let m = 1;
+    if (!app && d.forme === 'assemblees') m *= 0.6;
+    if (!app && d.forme === 'melange') m *= 0.8;
+    m *= {fonctionne:1.3, partiel:1, hs:0.8}[d.fonct];
+    if (d.degats.includes('brule')) m *= 0.7;
+    if (d.degats.includes('humide')) m *= 0.8;
+    if (d.degats.includes('casse')) m *= 0.9;
+    if (d.contient.includes('cpu')) m *= 1.15;
+    if (d.contient.includes('dores')) m *= 1.1;
+    if (!app && (d.contient.includes('radiateur') || d.contient.includes('batterie'))) m *= 0.85;
+    const v = base * m, e = precis ? 0.2 : 0.35, r50 = x => Math.round(x / 50) * 50;
+    return {lo: r50(v * (1 - e)), hi: r50(v * (1 + e)), precis};
   }
-
-  document.getElementById('type').addEventListener('change', updateEstimate);
-  document.getElementById('etat').addEventListener('change', updateEstimate);
-  document.getElementById('poids').addEventListener('input', updateEstimate);
-  updateEstimate();
+  function showEstimate(r){
+    const note = document.getElementById('estimateNote');
+    if (r.err) { document.getElementById('estimateValue').textContent = '—'; note.textContent = r.err; return; }
+    document.getElementById('estimateValue').textContent = r.lo + ' - ' + r.hi + ' FCFA';
+    note.textContent = r.precis ? "Estimation indicative : le prix final est confirmé après examen des pièces."
+      : "Estimation approximative (quantité incomplète) : ajoutez le poids ou le nombre de pièces pour l'affiner.";
+  }
+  function toggleCat(){
+    const c = collect().cat;
+    document.getElementById('typeWrap').classList.toggle('hide', c !== 'appareils');
+    document.getElementById('formeWrap').classList.toggle('hide', c === 'appareils');
+  }
+  document.querySelectorAll('input[name="cat"]').forEach(i => i.addEventListener('change', toggleCat));
+  document.getElementById('estimBtn').addEventListener('click', () => showEstimate(calc(collect())));
+  toggleCat();
 
   // ---- Capture photo + déclenchement de l'analyse ----
   const fileDrop = document.getElementById('fileDrop');
@@ -691,9 +756,8 @@ Valeur estimée : ${g('estimateValue').textContent}
       if (!response.ok) throw new Error('backend indisponible');
       const result = await response.json();
 
-      if (result.type) document.getElementById('type').value = result.type;
-      if (result.etat) document.getElementById('etat').value = result.etat;
-      updateEstimate();
+      if (result.fonct) document.getElementById('fonct').value = result.fonct;
+      showEstimate(calc(collect()));
 
       analyseStatus.textContent = `Analyse : ${result.type || '?'} — état ${result.etat || '?'} (confiance ${Math.round((result.confiance||0)*100)}%). Vous pouvez corriger avant d'envoyer.`;
       analyseStatus.className = 'analyse-status ok';
@@ -781,6 +845,7 @@ Valeur estimée : ${g('estimateValue').textContent}
     list.querySelectorAll('button').forEach(b => b.addEventListener('click', () => changeQty(names[b.dataset.i], +b.dataset.d)));
   }
   document.getElementById('orderBtn').addEventListener('click', () => {
+    if (window.rtSave) window.rtSave('commandes', {articles: Object.keys(cart).map(n => ({nom:n, quantite:cart[n]}))});
     const lines = Object.keys(cart).map(n => `• ${n} × ${cart[n]}`).join('\n');
     openWA('Bonjour ReTech, je souhaite commander :\n' + lines + '\nMerci de me confirmer le prix et la disponibilité.');
   });
@@ -796,5 +861,99 @@ Valeur estimée : ${g('estimateValue').textContent}
   routeFromHash();
 </script>
 
+<script type="module">
+if (window.FIREBASE_CONFIG) {
+  const V = '10.14.1', B = 'https://www.gstatic.com/firebasejs/' + V + '/';
+  const [{initializeApp}, A, F] = await Promise.all([import(B+'firebase-app.js'), import(B+'firebase-auth.js'), import(B+'firebase-firestore.js')]);
+  const app = initializeApp(window.FIREBASE_CONFIG), auth = A.getAuth(app), db = F.getFirestore(app);
+  const $ = id => document.getElementById(id);
+  let mode = 'login';
+
+  const gate = document.createElement('div');
+  gate.id = 'authGate';
+  gate.innerHTML = `<div class="box">
+    <h1>ReTech</h1>
+    <p id="authIntro">Connectez-vous pour acheter, vendre ou signaler un appareil.</p>
+    <button type="button" class="btn btn-ghost" id="gBtn">Continuer avec Google</button>
+    <p style="text-align:center">ou avec votre e-mail</p>
+    <form id="authForm" style="display:flex;flex-direction:column;gap:14px">
+      <div class="field signup"><label for="aNom">Nom complet</label><input id="aNom" autocomplete="name"></div>
+      <div class="field signup"><label for="aTel">Téléphone</label><input id="aTel" type="tel" autocomplete="tel" placeholder="Ex : 61 90 93 61"></div>
+      <div class="field"><label for="aMail">E-mail</label><input id="aMail" type="email" autocomplete="email" required></div>
+      <div class="field"><label for="aPass">Mot de passe (6 caractères minimum)</label><input id="aPass" type="password" autocomplete="current-password" required minlength="6"></div>
+      <button type="submit" class="btn btn-primary" id="aSubmit">Se connecter</button>
+    </form>
+    <div id="authMsg"></div>
+    <button type="button" class="link" id="aToggle">Pas de compte ? Créer un compte</button>
+    <button type="button" class="link" id="aForgot">Mot de passe oublié ?</button>
+  </div>`;
+  document.body.appendChild(gate);
+
+  function setMode(m){
+    mode = m;
+    gate.querySelectorAll('.signup').forEach(e => e.classList.toggle('hide', m === 'login'));
+    $('aSubmit').textContent = m === 'login' ? 'Se connecter' : 'Créer mon compte';
+    $('aToggle').textContent = m === 'login' ? 'Pas de compte ? Créer un compte' : 'Déjà un compte ? Se connecter';
+    $('aPass').autocomplete = m === 'login' ? 'current-password' : 'new-password';
+    $('authMsg').textContent = '';
+  }
+  setMode('login');
+  const msg = t => { $('authMsg').textContent = t; };
+  const ERR = {'auth/invalid-credential':'E-mail ou mot de passe incorrect.','auth/wrong-password':'E-mail ou mot de passe incorrect.','auth/user-not-found':'Aucun compte avec cet e-mail.','auth/email-already-in-use':'Cet e-mail a déjà un compte. Connectez-vous.','auth/weak-password':'Mot de passe trop court (6 caractères minimum).','auth/invalid-email':'Adresse e-mail invalide.','auth/too-many-requests':'Trop d\'essais. Réessayez dans quelques minutes.','auth/network-request-failed':'Pas de connexion internet.','auth/popup-closed-by-user':'Connexion Google annulée.','auth/unauthorized-domain':'Domaine non autorisé dans Firebase (voir réglages Authentication).'};
+  const fail = e => msg(ERR[e.code] || 'Erreur : ' + (e.code || e.message));
+
+  $('aToggle').onclick = () => setMode(mode === 'login' ? 'signup' : 'login');
+  $('aForgot').onclick = async () => {
+    if (!$('aMail').value) return msg("Entrez votre e-mail ci-dessus, puis touchez « Mot de passe oublié ».");
+    try { await A.sendPasswordResetEmail(auth, $('aMail').value); msg('E-mail de réinitialisation envoyé.'); } catch (e) { fail(e); }
+  };
+  $('authForm').onsubmit = async e => {
+    e.preventDefault(); msg('');
+    try {
+      if (mode === 'login') {
+        await A.signInWithEmailAndPassword(auth, $('aMail').value, $('aPass').value);
+      } else {
+        if (!$('aNom').value.trim() || !$('aTel').value.trim()) return msg('Nom et téléphone obligatoires.');
+        const c = await A.createUserWithEmailAndPassword(auth, $('aMail').value, $('aPass').value);
+        await A.updateProfile(c.user, {displayName: $('aNom').value.trim()});
+        await F.setDoc(F.doc(db, 'users', c.user.uid), {nom: $('aNom').value.trim(), tel: $('aTel').value.trim(), email: c.user.email, methode: 'email', createdAt: F.serverTimestamp()});
+      }
+    } catch (e) { fail(e); }
+  };
+  $('gBtn').onclick = async () => {
+    msg('');
+    try {
+      const r = await A.signInWithPopup(auth, new A.GoogleAuthProvider());
+      const d = {nom: r.user.displayName || '', email: r.user.email, methode: 'google', lastLogin: F.serverTimestamp()};
+      if (A.getAdditionalUserInfo(r).isNewUser) d.createdAt = F.serverTimestamp();
+      await F.setDoc(F.doc(db, 'users', r.user.uid), d, {merge: true});
+    } catch (e) { fail(e); }
+  };
+
+  const out = document.createElement('button');
+  out.className = 'logout'; out.textContent = 'Déconnexion'; out.hidden = true;
+  out.onclick = () => A.signOut(auth);
+  document.querySelector('.nav-inner').appendChild(out);
+
+  A.onAuthStateChanged(auth, async u => {
+    document.documentElement.classList.toggle('gated', !u);
+    gate.classList.toggle('hide', !!u);
+    out.hidden = !u;
+    if (!u) return;
+    if (!$('nom').value) $('nom').value = u.displayName || '';
+    try {
+      const snap = await F.getDoc(F.doc(db, 'users', u.uid));
+      if (snap.exists() && snap.data().tel && !$('tel').value) $('tel').value = snap.data().tel;
+    } catch (e) {}
+  });
+
+  window.rtSave = async (col, data) => {
+    try {
+      await F.addDoc(F.collection(db, col), {...data, uid: auth.currentUser.uid, email: auth.currentUser.email, createdAt: F.serverTimestamp()});
+      return true;
+    } catch (e) { console.error('Enregistrement impossible', e); return false; }
+  };
+}
+</script>
 </body>
 </html>
