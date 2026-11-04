@@ -4,6 +4,15 @@
 <meta charset="UTF-8">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://*.firebaseapp.com https://www.gstatic.com; frame-src https://*.firebaseapp.com https://*.google.com https://*.googleapis.com; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%232E7D4F%22/%3E%3Cg stroke=%22%23fff%22 stroke-width=%223%22 stroke-linecap=%22round%22 fill=%22none%22%3E%3Crect x=%2218%22 y=%2218%22 width=%2228%22 height=%2228%22 rx=%224%22/%3E%3Cpath d=%22M26 10v8M38 10v8M26 46v8M38 46v8M10 26h8M10 38h8M46 26h8M46 38h8%22/%3E%3C/g%3E%3Cpath d=%22M24 40c0-9 6-14 16-14 0 10-6 15-16 14z%22 fill=%22%23fff%22/%3E%3Cpath d=%22M24 40l10-10%22 stroke=%22%232E7D4F%22 stroke-width=%222%22 stroke-linecap=%22round%22/%3E%3C/svg%3E">
+<link rel="apple-touch-icon" href="logo.png">
+<meta name="theme-color" content="#2E7D4F">
+<meta property="og:type" content="website">
+<meta property="og:title" content="ReTech — Composants électroniques récupérés">
+<meta property="og:description" content="Collecte d'appareils électroniques hors d'usage et vente de composants testés. Green IT à Abomey-Bohicon, Bénin.">
+<meta property="og:image" content="https://linuskinti-ship-it.github.io/ReTech/og-image.png">
+<meta property="og:url" content="https://linuskinti-ship-it.github.io/ReTech/">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="ReTech collecte les appareils électroniques hors d'usage et vend des composants testés à Abomey-Bohicon, Bénin.">
 <title>ReTech — Composants électroniques récupérés | Abomey-Bohicon</title>
@@ -337,7 +346,8 @@
   .acc-card h3{color:var(--copper-light);font-size:16px;font-weight:600;}
   .brand-wrap{display:flex;align-items:center;gap:12px;}
   header .nav-inner{padding-left:20px;padding-right:20px;}
-  .brand{white-space:nowrap;}
+  .brand{white-space:nowrap;display:flex;align-items:center;gap:8px;}
+  .brand .logo{width:26px;height:26px;flex-shrink:0;}
   @media (max-width:420px){.brand{font-size:15px;}.brand-wrap{gap:8px;}header .nav-inner{padding-left:16px;padding-right:16px;gap:6px;}nav.tabs button{padding:8px 9px;}}
   @media (min-width:700px){header .nav-inner{padding-left:28px;padding-right:28px;}}
   .burger{background:none;border:1px solid var(--line);color:var(--paper);width:40px;height:40px;border-radius:3px;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;}
@@ -389,9 +399,10 @@
 </head>
 <body>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="rt-logo" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#2E7D4F"/><g stroke="#fff" stroke-width="3" stroke-linecap="round" fill="none"><rect x="18" y="18" width="28" height="28" rx="4"/><path d="M26 10v8M38 10v8M26 46v8M38 46v8M10 26h8M10 38h8M46 26h8M46 38h8"/></g><path d="M24 40c0-9 6-14 16-14 0 10-6 15-16 14z" fill="#fff"/><path d="M24 40l10-10" stroke="#2E7D4F" stroke-width="2" stroke-linecap="round"/></symbol></svg>
 <header>
   <div class="wrap nav-inner">
-    <div class="brand-wrap"><button type="button" class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><div class="brand"><span class="dot"></span>ReTech - Yesunana</div></div>
+    <div class="brand-wrap"><button type="button" class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><div class="brand"><svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><use href="#rt-logo"/></svg>ReTech - Yesunana</div></div>
     <nav class="tabs">
       <button class="tab-btn active" data-view="accueil" aria-label="Accueil"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg><span>Accueil</span></button>
     </nav>
