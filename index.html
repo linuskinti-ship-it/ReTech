@@ -945,7 +945,9 @@
     const cc = document.getElementById('cartCount'); cc.textContent = total; cc.style.display = total ? '' : 'none';
     updateCartBar();
     document.getElementById('orderBtn').style.display = names.length ? 'inline-block' : 'none';
-    if (!names.length){ list.innerHTML = '<p class="empty">Votre panier est vide. Parcourez la boutique pour ajouter des pièces.</p>'; return; }
+    if (!names.length){ list.innerHTML = '<p class="empty">Votre panier est vide.</p><button type="button" class="btn btn-primary" id="goShop" style="margin-top:16px"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6a3 3 0 016 0v2"/></svg>Aller à la boutique</button>';
+      document.getElementById('goShop').addEventListener('click', () => showView('boutique'));
+      return; }
     list.innerHTML = names.map((n, i) => `<div class="cart-item"><span>${n}</span><span class="qty"><button data-i="${i}" data-d="-1">−</button><b>${cart[n]}</b><button data-i="${i}" data-d="1">+</button></span></div>`).join('');
     list.querySelectorAll('button').forEach(b => b.addEventListener('click', () => changeQty(names[b.dataset.i], +b.dataset.d)));
   }
