@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: https:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://*.firebaseapp.com https://www.gstatic.com; frame-src https://*.firebaseapp.com https://*.google.com https://*.googleapis.com; object-src 'none'; base-uri 'self'; form-action 'self'">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://www.gstatic.com https://apis.google.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com data:; img-src 'self' data: blob: https:; connect-src 'self' https://*.googleapis.com https://*.firebaseio.com wss://*.firebaseio.com https://*.firebaseapp.com https://www.gstatic.com https://script.google.com https://script.googleusercontent.com; frame-src https://*.firebaseapp.com https://*.google.com https://*.googleapis.com; object-src 'none'; base-uri 'self'; form-action 'self'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 64 64%22%3E%3Crect width=%2264%22 height=%2264%22 rx=%2214%22 fill=%22%232E7D4F%22/%3E%3Cg stroke=%22%23fff%22 stroke-width=%223%22 stroke-linecap=%22round%22 fill=%22none%22%3E%3Crect x=%2218%22 y=%2218%22 width=%2228%22 height=%2228%22 rx=%224%22/%3E%3Cpath d=%22M26 10v8M38 10v8M26 46v8M38 46v8M10 26h8M10 38h8M46 26h8M46 38h8%22/%3E%3C/g%3E%3Cpath d=%22M24 40c0-9 6-14 16-14 0 10-6 15-16 14z%22 fill=%22%23fff%22/%3E%3Cpath d=%22M24 40l10-10%22 stroke=%22%232E7D4F%22 stroke-width=%222%22 stroke-linecap=%22round%22/%3E%3C/svg%3E">
 <link rel="apple-touch-icon" href="logo.png">
@@ -355,6 +355,12 @@
   .shop-intro h1{font-size:clamp(24px,5vw,36px);margin-bottom:8px;}
   .shop-intro p{color:var(--silver);font-size:15px;}
   .filter-btn{white-space:nowrap;flex-shrink:0;}
+  .don-note{border:1px solid var(--copper);background:var(--bg-alt);border-radius:4px;padding:16px;display:flex;flex-direction:column;gap:8px;font-size:14px;line-height:1.55;}
+  .don-note > b{color:var(--copper-light);font-size:16px;}
+  .don-note p{margin:0;color:var(--paper);}
+  .consent{display:flex;gap:10px;align-items:flex-start;font-size:14px;color:var(--paper);line-height:1.5;}
+  .consent input{margin-top:3px;accent-color:var(--copper);width:18px;height:18px;flex-shrink:0;}
+  body[data-view="signaler"] .wa-float{display:none;}
   .part-img{height:120px;display:flex;align-items:center;justify-content:center;background:var(--bg-alt2);color:var(--copper-light);}
   .part-img svg{width:68px;height:68px;}
   .var-sel{width:100%;padding:9px 10px;background:var(--bg);border:1px solid var(--line);color:var(--paper);border-radius:3px;font:inherit;font-size:13px;}
@@ -508,19 +514,37 @@
 <!-- ============ SIGNALER ============ -->
 <section class="view" id="signaler">
   <div class="page-head"><div class="wrap">
-    <h1>Signaler des composants</h1>
-    <p>Envoyez-nous votre nom, votre numéro et une photo des équipements ou composants à nous transmettre. Nous vous recontactons.</p>
+    <h1>Signaler des équipements à donner</h1>
+    <p>Vous avez des équipements électroniques usagés dont vous voulez vous débarrasser ? Dites-nous où vous êtes : nous vous appelons, puis nous venons les récupérer.</p>
   </div></div>
   <div class="wrap form-layout" style="grid-template-columns:1fr;max-width:640px;">
-    <form class="report" onsubmit="handleReport(event)">
+    <form class="report" id="reportForm" onsubmit="handleReport(event)">
+      <div class="don-note">
+        <b>Il s'agit d'un don</b>
+        <p>Vous donnez ces équipements à ReTech. Les pièces qui en seront extraites peuvent être <b>revendues</b> par ReTech.</p>
+      </div>
       <div class="row-2">
         <div class="field"><label for="nom">Nom</label><input type="text" id="nom" autocomplete="family-name" required></div>
         <div class="field"><label for="prenom">Prénom</label><input type="text" id="prenom" autocomplete="given-name" required></div>
       </div>
-      <div class="field"><label for="tel">Numéro de téléphone (WhatsApp)</label><input type="tel" id="tel" autocomplete="tel" placeholder="Ex : 97 00 00 00" required></div>
-      <div class="field"><label for="sville">Ville / quartier (optionnel)</label><input type="text" id="sville" placeholder="Ex : Abomey-Calavi, Godomey"></div>
+      <div class="field"><label for="tel">Numéro de téléphone</label><input type="tel" id="tel" autocomplete="tel" placeholder="Ex : 97 00 00 00" required></div>
+
+      <div class="step-title">Où êtes-vous ? (Bénin)</div>
+      <div class="row-2">
+        <div class="field"><label for="dep">Département</label><select id="dep" required><option value="">Choisir…</option></select></div>
+        <div class="field"><label for="com">Commune</label><select id="com" required disabled><option value="">Choisir le département d'abord</option></select></div>
+      </div>
+      <div class="row-2">
+        <div class="field"><label for="sville">Ville / arrondissement</label><input type="text" id="sville" placeholder="Ex : Godomey" required></div>
+        <div class="field"><label for="quartier">Quartier</label><input type="text" id="quartier" placeholder="Ex : Hoyo" required></div>
+      </div>
+      <div>
+        <button type="button" class="btn btn-ghost" id="geoBtn"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s-7-6.2-7-11a7 7 0 0114 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Ajouter ma position (facultatif)</button>
+        <div class="analyse-status" id="geoStatus"></div>
+      </div>
+
+      <div class="step-title">Photo des équipements</div>
       <div class="field">
-        <label>Photo des composants ou équipements</label>
         <input type="file" id="photoInput" accept="image/*" style="display:none"><input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none">
         <div class="file-drop" id="fileDrop">Touchez pour choisir une photo dans votre téléphone</div>
         <button type="button" class="btn btn-primary" id="cameraBtn" style="margin-top:10px;"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v12H4z"/><circle cx="12" cy="13" r="4"/></svg>Prendre une photo</button>
@@ -528,8 +552,11 @@
         <button type="button" class="btn btn-ghost" id="analyseBtn" style="display:none"></button>
         <div class="analyse-status" id="analyseStatus"></div>
       </div>
-      <div class="field"><label for="sdesc">Description (optionnel)</label><textarea id="sdesc" placeholder="Ex : 3 radios, 2 cartes mères, un lot de plaquettes"></textarea></div>
-      <div><button type="submit" class="btn btn-primary">Envoyer le signalement</button></div>
+      <div class="field"><label for="sdesc">Description (optionnel)</label><textarea id="sdesc" placeholder="Ex : 3 radios, 2 cartes mères, un lot de plaquettes. Repère pour trouver la maison."></textarea></div>
+
+      <label class="consent"><input type="checkbox" id="consent" required> Je fais don de ces équipements à ReTech et j'accepte que les pièces qui en seront extraites soient revendues.</label>
+      <div style="position:absolute;left:-9999px;" aria-hidden="true"><input type="text" id="website" tabindex="-1" autocomplete="off"></div>
+      <div><button type="submit" class="btn btn-primary" id="sendBtn">Envoyer le signalement</button></div>
       <div class="confirm-box" id="confirmBox"></div>
     </form>
   </div>
@@ -615,7 +642,9 @@
 <a class="wa-float" id="waFloat" target="_blank" rel="noopener">WhatsApp</a>
 
 <script>
-  const WHATSAPP_NUMBER = '22961909361'; // ex. '22997000000' (229 + numéro, sans + ni espaces)
+  const WHATSAPP_NUMBER = '22948155877'; // ex. '22997000000' (229 + numéro, sans + ni espaces)
+  const REPORT_ENDPOINT = ''; // adresse du script Google (voir instructions)
+  const REPORT_TOKEN = 'rt-655119a56395ffb0d4b0';
   const PROTECTED = ['panier', 'compte']; // pages qui demandent d'abord une connexion
   const ENABLE_PHOTO_AI = false; // passer à true quand le backend /api/evaluer-photo existe
   function showView(view){
@@ -629,6 +658,7 @@
     window.scrollTo({top:0, behavior:'instant'});
     try{ if(location.hash!=='#'+view) history.replaceState(null,'','#'+view); }catch(e){}
     if (view === 'compte' && window.rtRenderAccount) window.rtRenderAccount();
+    document.body.dataset.view = view;
     updateCartBar();
   }
   document.querySelectorAll('.tab-btn').forEach(btn=>{
@@ -638,21 +668,61 @@
   function handleReport(e){
     e.preventDefault();
     const g = id => document.getElementById(id);
-    if (!reportFile) { toast('Ajoutez une photo des composants à signaler.'); return; }
-    const text = ['Signalement ReTech', 'Nom : ' + g('nom').value + ' ' + g('prenom').value, 'Téléphone : ' + g('tel').value,
-      'Lieu : ' + (g('sville').value || '-'), 'Description : ' + (g('sdesc').value || '-')].join('\n');
     const box = g('confirmBox');
-    const canShare = navigator.canShare && navigator.canShare({files: [reportFile]});
-    box.innerHTML = '<b>Message prêt.</b> 1) Envoyez le message WhatsApp qui vient de s\'ouvrir. 2) ' + (canShare
-      ? 'Envoyez aussi la photo :<br><button type="button" class="btn btn-primary" id="sharePhoto">Partager la photo</button>'
-      : 'Joignez la photo dans la conversation WhatsApp (bouton trombone).')
-      + '<br><a class="btn btn-ghost" target="_blank" rel="noopener" href="' + waUrl(text) + '">Rouvrir WhatsApp</a>';
-    box.classList.add('show');
-    if (canShare) g('sharePhoto').addEventListener('click', () => navigator.share({files: [reportFile], title: 'Photo ReTech'}).catch(() => {}));
-    window.open(waUrl(text), '_blank', 'noopener');
+    if (g('website').value) { box.textContent = 'Merci !'; box.classList.add('show'); return; }
+    if (!REPORT_ENDPOINT) { toast("L'envoi des signalements n'est pas encore activé."); return; }
+    if (!photoData) { toast('Ajoutez une photo des équipements (patientez une seconde si elle vient d\'être choisie).'); return; }
+    if (!g('consent').checked) { toast('Cochez la case de consentement pour continuer.'); return; }
+    try { if (Date.now() - Number(localStorage.getItem('rt-last-report') || 0) < 60000) { toast('Un signalement vient d\'être envoyé. Patientez une minute.'); return; } } catch (err) {}
+    const btn = g('sendBtn'); btn.disabled = true; btn.textContent = 'Envoi…';
+    const data = {token: REPORT_TOKEN, nom: g('nom').value, prenom: g('prenom').value, tel: g('tel').value,
+      departement: g('dep').value, commune: g('com').value, ville: g('sville').value, quartier: g('quartier').value,
+      position: geoLink, description: g('sdesc').value, don: true, photo: photoData};
+    fetch(REPORT_ENDPOINT, {method: 'POST', mode: 'no-cors', headers: {'Content-Type': 'text/plain;charset=utf-8'}, body: JSON.stringify(data)})
+      .then(() => {
+        try { localStorage.setItem('rt-last-report', String(Date.now())); } catch (err) {}
+        box.innerHTML = '<b>Merci !</b> Votre signalement a bien été envoyé. Notre équipe vous appellera pour organiser la récupération.';
+        box.classList.add('show');
+        g('reportForm').reset(); g('com').disabled = true; g('photoPreview').style.display = 'none';
+        reportFile = null; photoData = null; geoLink = ''; g('geoStatus').textContent = '';
+        box.scrollIntoView({behavior: 'smooth', block: 'center'});
+      })
+      .catch(() => toast('Envoi impossible. Vérifiez votre connexion et réessayez.'))
+      .finally(() => { btn.disabled = false; btn.textContent = 'Envoyer le signalement'; });
   }
 
-    let reportFile = null;
+  let reportFile = null, photoData = null, geoLink = '';
+  function compress(file){
+    return new Promise((res, rej) => {
+      const img = new Image(), u = URL.createObjectURL(file);
+      img.onload = () => {
+        const k = Math.min(1, 1280 / Math.max(img.width, img.height)), c = document.createElement('canvas');
+        c.width = Math.round(img.width * k); c.height = Math.round(img.height * k);
+        c.getContext('2d').drawImage(img, 0, 0, c.width, c.height);
+        URL.revokeObjectURL(u); res(c.toDataURL('image/jpeg', 0.75));
+      };
+      img.onerror = () => rej(new Error('image'));
+      img.src = u;
+    });
+  }
+  const BENIN = {"Alibori": ["Banikoara", "Gogounou", "Kandi", "Karimama", "Malanville", "Ségbana"], "Atacora": ["Boukoumbé", "Cobly", "Kérou", "Kouandé", "Matéri", "Natitingou", "Péhunco", "Tanguiéta", "Toucountouna"], "Atlantique": ["Abomey-Calavi", "Allada", "Kpomassè", "Ouidah", "Sô-Ava", "Toffo", "Tori-Bossito", "Zè"], "Borgou": ["Bembèrèkè", "Kalalé", "N'Dali", "Nikki", "Parakou", "Pèrèrè", "Sinendé", "Tchaourou"], "Collines": ["Bantè", "Dassa-Zoumè", "Glazoué", "Ouèssè", "Savalou", "Savè"], "Couffo": ["Aplahoué", "Djakotomey", "Dogbo-Tota", "Klouékanmè", "Lalo", "Toviklin"], "Donga": ["Bassila", "Copargo", "Djougou", "Ouaké"], "Littoral": ["Cotonou"], "Mono": ["Athiémé", "Bopa", "Comè", "Grand-Popo", "Houéyogbé", "Lokossa"], "Ouémé": ["Adjarra", "Adjohoun", "Aguégués", "Akpro-Missérété", "Avrankou", "Bonou", "Dangbo", "Porto-Novo", "Sèmè-Podji"], "Plateau": ["Adja-Ouèrè", "Ifangni", "Kétou", "Pobè", "Sakété"], "Zou": ["Abomey", "Agbangnizoun", "Bohicon", "Covè", "Djidja", "Ouinhi", "Za-Kpota", "Zagnanado", "Zogbodomey"]};
+  const depSel = document.getElementById('dep'), comSel = document.getElementById('com');
+  Object.keys(BENIN).forEach(d => depSel.add(new Option(d, d)));
+  depSel.addEventListener('change', () => {
+    comSel.innerHTML = '<option value="">Choisir…</option>';
+    (BENIN[depSel.value] || []).forEach(c => comSel.add(new Option(c, c)));
+    comSel.disabled = !depSel.value;
+    if (BENIN[depSel.value] && BENIN[depSel.value].length === 1) comSel.value = BENIN[depSel.value][0];
+  });
+  document.getElementById('geoBtn').addEventListener('click', () => {
+    const st = document.getElementById('geoStatus');
+    if (!navigator.geolocation) { st.textContent = 'Position indisponible sur cet appareil.'; return; }
+    st.textContent = 'Recherche de votre position…';
+    navigator.geolocation.getCurrentPosition(
+      p => { geoLink = 'https://www.google.com/maps?q=' + p.coords.latitude.toFixed(6) + ',' + p.coords.longitude.toFixed(6); st.textContent = 'Position ajoutée ✓'; },
+      () => { st.textContent = "Position refusée ou indisponible. Ce n'est pas obligatoire."; },
+      {enableHighAccuracy: true, timeout: 15000});
+  });
 
   // ---- Capture photo + déclenchement de l'analyse ----
   const fileDrop = document.getElementById('fileDrop');
@@ -669,7 +739,8 @@
   function onPhoto(inp){
     const file = inp.files[0];
     if (!file) return;
-    reportFile = file;
+    reportFile = file; photoData = null;
+    compress(file).then(d => { photoData = d; }).catch(() => { photoData = null; });
     const reader = new FileReader();
     reader.onload = () => {
       photoPreview.src = reader.result;
