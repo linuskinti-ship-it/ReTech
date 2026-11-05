@@ -234,8 +234,9 @@
 
   /* ================= BOUTIQUE PAGE ================= */
   .filters{
-    padding: 32px 0 0; display:flex; gap:10px; flex-wrap:wrap;
+    padding: 24px 28px 0; display:flex; gap:10px; flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none;
   }
+  .filters::-webkit-scrollbar{display:none;}
   .filter-btn{
     font-family:'IBM Plex Sans'; font-size:13px; font-weight:500;
     padding: 8px 16px; border-radius: 20px; border:1px solid var(--line);
@@ -246,8 +247,8 @@
   .filter-btn:hover:not(.active){border-color: var(--copper-light); color:var(--copper-light);}
 
   .shop-grid{
-    padding: 36px 0 80px;
-    display:grid; grid-template-columns: repeat(3, 1fr); gap: 18px;
+    padding: 24px 28px 100px;
+    display:grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 18px;
   }
   .part{
     border:1px solid var(--line); border-radius:3px; overflow:hidden;
@@ -290,7 +291,13 @@
     nav.tabs button{padding:9px 12px; font-size:13px;}
   }
   @media (max-width: 560px){
-    .shop-grid{grid-template-columns: 1fr;}
+    .shop-grid{grid-template-columns: 1fr 1fr; gap:12px; padding-left:20px; padding-right:20px;}
+    .filters{padding-left:20px; padding-right:20px;}
+    .brand-sub{display:none;}
+    .part-body{padding:12px;}
+    .part-tag{padding:8px 12px;}
+    .part-tag .badge{display:none;}
+    .part-foot{padding:10px 12px;}
   }
 
   @media (prefers-reduced-motion: reduce){
@@ -309,7 +316,7 @@
   .qty button{width:32px;height:32px;border-radius:3px;border:1px solid var(--copper);background:transparent;color:var(--copper-light);font-size:18px;cursor:pointer;}
   .empty{color:var(--silver);}
   .wa-float{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:25;background:#25D366;color:#0b2a1a;font-weight:600;font-size:14px;padding:12px 18px;border-radius:30px;text-decoration:none;box-shadow:0 4px 14px rgba(0,0,0,.35);}
-  @media (max-width:560px){.nav-inner{gap:8px;}nav.tabs button span{display:none;}nav.tabs button{padding:8px 10px;}}
+  @media (max-width:560px){.nav-inner{gap:8px;}nav.tabs button{padding:8px 10px;}}
 
   .chips{display:flex;flex-wrap:wrap;gap:8px;}
   .chips label{display:flex;align-items:center;gap:8px;border:1px solid var(--line);border-radius:3px;padding:10px 12px;font-size:14px;color:var(--paper);background:var(--bg-alt);cursor:pointer;}
@@ -344,6 +351,23 @@
   
   .acc-card{border:1px solid var(--line);background:var(--bg-alt);border-radius:3px;padding:20px;margin-bottom:20px;display:flex;flex-direction:column;gap:14px;}
   .acc-card h3{color:var(--copper-light);font-size:16px;font-weight:600;}
+  .shop-intro{padding-top:36px;padding-bottom:4px;}
+  .shop-intro h1{font-size:clamp(24px,5vw,36px);margin-bottom:8px;}
+  .shop-intro p{color:var(--silver);font-size:15px;}
+  .filter-btn{white-space:nowrap;flex-shrink:0;}
+  .part-img{height:120px;display:flex;align-items:center;justify-content:center;background:var(--bg-alt2);color:var(--copper-light);}
+  .part-img svg{width:68px;height:68px;}
+  .var-sel{width:100%;padding:9px 10px;background:var(--bg);border:1px solid var(--line);color:var(--paper);border-radius:3px;font:inherit;font-size:13px;}
+  .stock{font-size:12px;font-weight:600;}.stock.ok{color:var(--copper-light);}.stock.out{color:#c0392b;}
+  .qty-add{display:flex;gap:8px;align-items:center;}
+  .qty-in{width:50px;padding:8px 4px;text-align:center;background:var(--bg);border:1px solid var(--line);color:var(--paper);border-radius:3px;font:inherit;font-size:13px;}
+  .buy-btn:disabled,.qty-in:disabled{opacity:.45;cursor:not-allowed;}
+  .part-foot{flex-wrap:wrap;gap:10px;}
+  nav.tabs button[data-view="signaler"]{border:1px solid var(--copper);color:var(--copper-light);border-radius:3px;}
+  nav.tabs button.active{background:var(--copper);color:var(--bg);border-color:var(--copper);}
+  .tab-btn.active #cartCount{background:var(--bg);color:var(--copper);}
+  .confirm-box a.btn{margin-top:10px;}
+  .brand-wrap{min-width:0;}
   .brand-wrap{display:flex;align-items:center;gap:12px;}
   header .nav-inner{padding-left:20px;padding-right:20px;}
   .brand{white-space:nowrap;display:flex;align-items:center;gap:8px;}
@@ -402,15 +426,26 @@
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="rt-logo" viewBox="0 0 64 64"><rect width="64" height="64" rx="14" fill="#2E7D4F"/><g stroke="#fff" stroke-width="3" stroke-linecap="round" fill="none"><rect x="18" y="18" width="28" height="28" rx="4"/><path d="M26 10v8M38 10v8M26 46v8M38 46v8M10 26h8M10 38h8M46 26h8M46 38h8"/></g><path d="M24 40c0-9 6-14 16-14 0 10-6 15-16 14z" fill="#fff"/><path d="M24 40l10-10" stroke="#2E7D4F" stroke-width="2" stroke-linecap="round"/></symbol></svg>
 <header>
   <div class="wrap nav-inner">
-    <div class="brand-wrap"><button type="button" class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><div class="brand"><svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><use href="#rt-logo"/></svg>ReTech - Yesunana</div></div>
+    <div class="brand-wrap"><button type="button" class="burger" id="burger" aria-label="Ouvrir le menu" aria-expanded="false"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg></button><div class="brand" onclick="showView('accueil')" role="link" tabindex="0" style="cursor:pointer"><svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><use href="#rt-logo"/></svg>ReTech<span class="brand-sub"> - Yesunana</span></div></div>
     <nav class="tabs">
-      <button class="tab-btn active" data-view="accueil" aria-label="Accueil"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg><span>Accueil</span></button>
+      <button class="tab-btn" data-view="signaler" aria-label="Signaler"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l10 18H2L12 3z"/><path d="M12 10v5"/><path d="M12 18v.5"/></svg><span>Signaler</span></button>
+      <button class="tab-btn" data-view="panier" aria-label="Panier"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.5 12h11L21 7H6"/></svg><span id="cartCount">0</span></button>
     </nav>
   </div>
 </header>
 
 <!-- ============ ACCUEIL ============ -->
 <section class="view active" id="accueil">
+  <div class="wrap shop-intro">
+    <h1>Composants électroniques récupérés et testés</h1>
+    <p>Choisissez vos pièces et ajoutez-les au panier. Un compte est demandé au moment de commander.</p>
+  </div>
+  <div class="wrap filters" id="filters"></div>
+  <div class="wrap"><input id="search" class="search" type="search" placeholder="Rechercher un composant (ex : résistance, diode, LED)"></div>
+  <div class="wrap shop-grid" id="shopGrid"></div>
+</section>
+
+<section class="view" id="apropos">
 
   <div class="hero">
     <div class="trace-bg">
@@ -432,7 +467,7 @@
       <p class="lede">ReTech collecte les appareils électroniques hors d'usage, teste chaque composant, et rend disponibles ceux qui fonctionnent encore pour réparer ou fabriquer d'autres appareils.</p>
       <div class="hero-ctas">
         <button class="btn btn-primary" onclick="showView('signaler')"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l10 18H2L12 3z"/><path d="M12 10v5"/><path d="M12 18v.5"/></svg>Signaler un appareil</button>
-        <button class="btn btn-ghost" onclick="showView('boutique')"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6a3 3 0 016 0v2"/></svg>Voir les pièces disponibles</button>
+        <button class="btn btn-ghost" onclick="showView('accueil')"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6a3 3 0 016 0v2"/></svg>Voir les composants</button>
       </div>
     </div>
   </div>
@@ -468,6 +503,45 @@
     </div>
   </div>
 
+</section>
+
+<!-- ============ SIGNALER ============ -->
+<section class="view" id="signaler">
+  <div class="page-head"><div class="wrap">
+    <h1>Signaler des composants</h1>
+    <p>Envoyez-nous votre nom, votre numéro et une photo des équipements ou composants à nous transmettre. Nous vous recontactons.</p>
+  </div></div>
+  <div class="wrap form-layout" style="grid-template-columns:1fr;max-width:640px;">
+    <form class="report" onsubmit="handleReport(event)">
+      <div class="row-2">
+        <div class="field"><label for="nom">Nom</label><input type="text" id="nom" autocomplete="family-name" required></div>
+        <div class="field"><label for="prenom">Prénom</label><input type="text" id="prenom" autocomplete="given-name" required></div>
+      </div>
+      <div class="field"><label for="tel">Numéro de téléphone (WhatsApp)</label><input type="tel" id="tel" autocomplete="tel" placeholder="Ex : 97 00 00 00" required></div>
+      <div class="field"><label for="sville">Ville / quartier (optionnel)</label><input type="text" id="sville" placeholder="Ex : Abomey-Calavi, Godomey"></div>
+      <div class="field">
+        <label>Photo des composants ou équipements</label>
+        <input type="file" id="photoInput" accept="image/*" style="display:none"><input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none">
+        <div class="file-drop" id="fileDrop">Touchez pour choisir une photo dans votre téléphone</div>
+        <button type="button" class="btn btn-primary" id="cameraBtn" style="margin-top:10px;"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v12H4z"/><circle cx="12" cy="13" r="4"/></svg>Prendre une photo</button>
+        <img id="photoPreview" alt="Aperçu de la photo" style="display:none; max-width:100%; border-radius:3px; margin-top:8px; border:1px solid var(--line);">
+        <button type="button" class="btn btn-ghost" id="analyseBtn" style="display:none"></button>
+        <div class="analyse-status" id="analyseStatus"></div>
+      </div>
+      <div class="field"><label for="sdesc">Description (optionnel)</label><textarea id="sdesc" placeholder="Ex : 3 radios, 2 cartes mères, un lot de plaquettes"></textarea></div>
+      <div><button type="submit" class="btn btn-primary">Envoyer le signalement</button></div>
+      <div class="confirm-box" id="confirmBox"></div>
+    </form>
+  </div>
+</section>
+
+
+<section class="view" id="panier">
+  <div class="page-head"><div class="wrap"><h1>Mon panier</h1><p>Envoyez votre commande par WhatsApp : nous confirmons le prix et la disponibilité, puis vous récupérez ou êtes livré.</p></div></div>
+  <div class="wrap" style="padding-top:32px;padding-bottom:100px"><div id="cartList"></div><button class="btn btn-primary" id="orderBtn" style="margin-top:22px">Commander sur WhatsApp</button>
+    <p class="submit-note" id="orderStatus" style="margin-top:12px"></p></div>
+</section>
+
   <section class="partners" id="partenaires">
     <div class="wrap">
       <h2>Nos partenaires</h2>
@@ -487,166 +561,9 @@
     </div>
   </section>
 
-  <footer>
+<footer class="site-foot">
     <div class="wrap">ReTech — Abomey . Bohicon, Bénin</div>
   </footer>
-</section>
-
-<!-- ============ SIGNALER ============ -->
-<section class="view" id="signaler">
-  <div class="page-head">
-    <div class="wrap">
-      <h1>Signaler un appareil</h1>
-      <p>Décrivez l'appareil hors d'usage et l'endroit où le récupérer. Nous vous recontactons pour organiser la collecte.</p>
-    </div>
-  </div>
-
-  <div class="wrap form-layout">
-    <form class="report" onsubmit="handleReport(event)">
-      <div class="row-2">
-        <div class="field">
-          <label for="nom">Nom complet</label>
-          <input type="text" id="nom" placeholder="Ex : Aïssatou Dossou" required>
-        </div>
-        <div class="field">
-          <label for="tel">Téléphone</label>
-          <input type="tel" id="tel" placeholder="Ex : 97 00 00 00" required>
-        </div>
-      </div>
-
-      <div class="field">
-        <label for="ville">Ville / Quartier</label>
-        <input type="text" id="ville" placeholder="Ex : Abomey-Calavi, Godomey" required>
-      </div>
-
-      <div class="step-title">Étape 1 — Que vendez-vous ?</div>
-      <div class="field"><div class="chips" id="catChips">
-        <label><input type="radio" name="cat" value="cartes_meres"> Cartes mères PC</label>
-        <label><input type="radio" name="cat" value="industrielles"> Cartes industrielles</label>
-        <label><input type="radio" name="cat" value="plaquettes"> Plaquettes / cartes diverses</label>
-        <label><input type="radio" name="cat" value="composants"> Composants triés</label>
-        <label><input type="radio" name="cat" value="appareils"> Appareils complets</label>
-        <label><input type="radio" name="cat" value="autre"> Autre</label>
-      </div></div>
-      <div class="field hide" id="typeWrap">
-        <label for="type">Quel appareil ?</label>
-        <select id="type"></select>
-      </div>
-      <div class="field">
-        <label for="marque">Marque / modèle / précisions (optionnel)</label>
-        <input type="text" id="marque" placeholder="Ex : Dell Optiplex, carte d'onduleur, lot de condensateurs">
-      </div>
-
-      <div class="step-title">Étape 2 — Quelle quantité ?</div>
-      <div class="row-2">
-        <div class="field"><label for="poids">Poids estimé (kg)</label><input type="number" id="poids" min="0" step="0.1" placeholder="Ex : 5"></div>
-        <div class="field"><label for="nb">OU nombre de pièces</label><input type="number" id="nb" min="0" step="1" placeholder="Ex : 12"></div>
-      </div>
-
-      <div class="step-title">Étape 3 — Quel est l'état ?</div>
-      <div class="field" id="formeWrap"><div class="chips">
-        <label><input type="radio" name="forme" value="nues" checked> Cartes nues et propres (sans radiateur alu ni batterie)</label>
-        <label><input type="radio" name="forme" value="assemblees"> Appareils encore assemblés (à démonter)</label>
-        <label><input type="radio" name="forme" value="melange"> Un mélange des deux</label>
-      </div></div>
-      <div class="row-2">
-        <div class="field"><label for="fonct">Fonctionnement</label>
-          <select id="fonct"><option value="fonctionne">Fonctionne encore</option><option value="partiel" selected>Partiellement / je ne sais pas</option><option value="hs">Hors d'usage</option></select></div>
-        <div class="field"><label for="remise">Remise</label>
-          <select id="remise"><option>Je dépose chez vous</option><option>Vous venez récupérer</option></select></div>
-      </div>
-      <div class="field"><label>Dégâts visibles</label><div class="chips">
-        <label><input type="checkbox" name="degat" value="brule"> Brûlé</label>
-        <label><input type="checkbox" name="degat" value="humide"> Humide / rouillé</label>
-        <label><input type="checkbox" name="degat" value="casse"> Cassé / pièces manquantes</label>
-      </div></div>
-      <div class="field"><label>Cela contient (cochez ce que vous voyez)</label><div class="chips">
-        <label><input type="checkbox" name="contient" value="cpu"> Processeur / mémoire (RAM)</label>
-        <label><input type="checkbox" name="contient" value="dores"> Connecteurs dorés</label>
-        <label><input type="checkbox" name="contient" value="radiateur"> Radiateur alu / ventilateur</label>
-        <label><input type="checkbox" name="contient" value="batterie"> Batterie / pile</label>
-        <label><input type="checkbox" name="contient" value="gros"> Gros condensateurs / transformateur</label>
-        <label><input type="checkbox" name="contient" value="ecran"> Écran / dalle</label>
-        <label><input type="checkbox" name="contient" value="cuivre"> Moteur / bobines / câbles cuivre</label>
-      </div></div>
-      <div class="field">
-        <label for="prix">Prix souhaité en FCFA (optionnel)</label>
-        <input type="number" id="prix" min="0" step="50" placeholder="Ex : 10000">
-      </div>
-
-      <div class="field">
-        <label for="desc">Description courte</label>
-        <textarea id="desc" placeholder="Ex : radio qui ne s'allume plus, boîtier cassé mais carte intacte"></textarea>
-      </div>
-
-      <div class="field">
-        <label>Photo de l'appareil</label>
-        <input type="file" id="photoInput" accept="image/*" style="display:none"><input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none">
-        <div class="file-drop" id="fileDrop">Glissez une photo ici, ou touchez pour en choisir une</div>
-        <button type="button" class="btn btn-primary" id="cameraBtn" style="margin-top:10px;">📷 Prendre une photo</button>
-        <img id="photoPreview" style="display:none; max-width:100%; border-radius:3px; margin-top:8px; border:1px solid var(--line);">
-        <button type="button" class="btn btn-ghost" id="analyseBtn" style="display:none; margin-top:10px;">Analyser la photo</button>
-        <div class="analyse-status" id="analyseStatus"></div>
-      </div>
-
-      <button type="button" class="btn btn-ghost" id="estimBtn">Obtenir mon estimation indicative</button>
-      <div class="estimate-box" id="estimateBox">
-        <span class="estimate-label">Valeur estimée (indicative)</span>
-        <span class="estimate-value" id="estimateValue">—</span>
-      </div>
-      <p class="submit-note" id="estimateNote">Estimation provisoire : le prix final est confirmé après examen des pièces.</p>
-
-      <div>
-        <button type="submit" class="btn btn-primary">Envoyer le signalement</button>
-        
-      </div>
-
-      <div class="confirm-box" id="confirmBox">
-        Votre message WhatsApp est prêt : envoyez-le (avec la photo) pour finaliser le signalement. Nous vous recontactons pour organiser la collecte.
-      </div>
-    </form>
-
-    <div class="side-panel">
-      <h3>Ce qui est accepté</h3>
-      <ul>
-        <li>Radios, chargeurs, blocs d'alimentation</li>
-        <li>Cartes mères PC, cartes industrielles, plaquettes de tout genre</li>
-        <li>Composants triés (condensateurs, connecteurs, puces…)</li>
-        <li>Téléviseurs, ordinateurs, périphériques</li>
-        <li>Tout appareil électronique hors d'usage, même incomplet</li>
-      </ul>
-    </div>
-  </div>
-</section>
-
-<!-- ============ BOUTIQUE ============ -->
-<section class="view" id="boutique">
-  <div class="page-head">
-    <div class="wrap">
-      <h1>Composants disponibles</h1>
-      <p>Pièces récupérées, testées et validées — prêtes à réparer ou à entrer dans un nouveau montage.</p>
-    </div>
-  </div>
-
-  <div class="wrap filters">
-    <button class="filter-btn active" data-cat="tous">Tous</button>
-    <button class="filter-btn" data-cat="passifs">Composants passifs</button>
-    <button class="filter-btn" data-cat="actifs">Composants actifs</button>
-    <button class="filter-btn" data-cat="modules">Modules</button>
-    <button class="filter-btn" data-cat="appareils">Appareils reconditionnés</button>
-  </div>
-  <div class="wrap"><input id="search" class="search" type="search" placeholder="Rechercher un composant (ex : résistance, radio)"></div>
-
-  <div class="wrap shop-grid" id="shopGrid">
-    <!-- injected by JS -->
-  </div>
-</section>
-
-<section class="view" id="panier">
-  <div class="page-head"><div class="wrap"><h1>Mon panier</h1><p>Envoyez votre commande par WhatsApp : nous confirmons le prix et la disponibilité, puis vous récupérez ou êtes livré.</p></div></div>
-  <div class="wrap" style="padding-top:32px;padding-bottom:100px"><div id="cartList"></div><button class="btn btn-primary" id="orderBtn" style="margin-top:22px">Commander sur WhatsApp</button>
-    <p class="submit-note" id="orderStatus" style="margin-top:12px"></p></div>
-</section>
 
 <div class="drawer-backdrop" id="drawerBackdrop"></div>
 <aside class="drawer" id="drawer" aria-hidden="true" aria-label="Menu du site">
@@ -655,8 +572,7 @@
   <nav class="drawer-nav">
     <button type="button" data-go="accueil"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>Accueil</button>
     <button type="button" data-go="signaler"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l10 18H2L12 3z"/><path d="M12 10v5"/><path d="M12 18v.5"/></svg>Signaler un appareil</button>
-    <button type="button" data-go="boutique"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6a3 3 0 016 0v2"/></svg>Boutique</button>
-    <button type="button" data-go="panier"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.5 12h11L21 7H6"/></svg>Panier<span id="cartCount">0</span></button>
+    <button type="button" data-go="panier"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.5 12h11L21 7H6"/></svg>Panier</button>
     <button type="button" data-go="compte"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg>Mon compte</button>
   </nav>
   <div>
@@ -666,6 +582,7 @@
   </div>
   <nav class="drawer-nav">
     <h4>Informations</h4>
+    <button type="button" data-go="apropos"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v6M12 7.5v.5"/></svg>À propos de ReTech</button>
     <button type="button" data-go="infos"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6l8-3z"/></svg>Confidentialité et sécurité</button>
     <a id="drawerWa" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12a8 8 0 01-11.5 7.2L3 21l1.8-5.5A8 8 0 1121 12z"/></svg>Nous contacter sur WhatsApp</a>
   </nav>
@@ -699,7 +616,7 @@
 
 <script>
   const WHATSAPP_NUMBER = '22961909361'; // ex. '22997000000' (229 + numéro, sans + ni espaces)
-  const PROTECTED = ['signaler', 'panier', 'compte']; // pages qui demandent d'abord une connexion
+  const PROTECTED = ['panier', 'compte']; // pages qui demandent d'abord une connexion
   const ENABLE_PHOTO_AI = false; // passer à true quand le backend /api/evaluer-photo existe
   function showView(view){
     if (PROTECTED.includes(view) && window.FIREBASE_CONFIG && !(window.rtIsAuthed && window.rtIsAuthed())) {
@@ -720,87 +637,22 @@
 
   function handleReport(e){
     e.preventDefault();
-    const d = collect(), r = calc(d), g = id => document.getElementById(id);
-    showEstimate(r);
-    if (r.err) { g('estimBtn').scrollIntoView({behavior:'smooth', block:'center'}); return; }
-    const L = {cartes_meres:'Cartes mères PC', industrielles:'Cartes industrielles', plaquettes:'Plaquettes / cartes diverses', composants:'Composants triés', appareils:'Appareils complets', autre:'Autre'};
-    const F = {nues:'Cartes nues et propres', assemblees:'Appareils assemblés (à démonter)', melange:'Mélange'};
-    const O = {fonctionne:'Fonctionne', partiel:'Partiel / inconnu', hs:"Hors d'usage"};
-    const lines = [
-      "Signalement ReTech",
-      "Nom : " + g('nom').value, "Téléphone : " + g('tel').value, "Lieu : " + g('ville').value,
-      "Catégorie : " + L[d.cat] + (d.cat === 'appareils' ? " (" + d.type + ")" : ''),
-      "Précisions : " + (g('marque').value || '-'),
-      "Quantité : " + (d.poids ? d.poids + ' kg' : '') + (d.poids && d.nb ? ' / ' : '') + (d.nb ? d.nb + ' pièces' : ''),
-      "Forme : " + F[d.forme], "Fonctionnement : " + O[d.fonct],
-      "Dégâts : " + (d.degats.join(', ') || 'aucun'), "Contient : " + (d.contient.join(', ') || '-'),
-      "Remise : " + g('remise').value, "Prix souhaité : " + (g('prix').value ? g('prix').value + ' FCFA' : '-'),
-      "Description : " + (g('desc').value || '-'),
-      "Estimation indicative : " + g('estimateValue').textContent,
-      "(Je joins la photo dans cette conversation)"
-    ];
-    needAuth(() => {
-      if (window.rtSave) window.rtSave('signalements', {nom:g('nom').value, tel:g('tel').value, ville:g('ville').value, categorie:d.cat, typeAppareil:d.type, marque:g('marque').value, poids:d.poids, nbPieces:d.nb, forme:d.forme, fonctionnement:d.fonct, degats:d.degats, contient:d.contient, remise:g('remise').value, prixSouhaite:Number(g('prix').value)||null, description:g('desc').value, estimationMin:r.lo, estimationMax:r.hi});
-      const url = waUrl(lines.join('\n'));
-      g('confirmBox').innerHTML = 'Signalement prêt. Envoyez-le sur WhatsApp (avec la photo) pour finaliser :<br><a class="btn btn-primary" style="margin-top:10px;display:inline-block" target="_blank" rel="noopener" href="' + url + '">Ouvrir WhatsApp</a>';
-      g('confirmBox').classList.add('show');
-    });
+    const g = id => document.getElementById(id);
+    if (!reportFile) { toast('Ajoutez une photo des composants à signaler.'); return; }
+    const text = ['Signalement ReTech', 'Nom : ' + g('nom').value + ' ' + g('prenom').value, 'Téléphone : ' + g('tel').value,
+      'Lieu : ' + (g('sville').value || '-'), 'Description : ' + (g('sdesc').value || '-')].join('\n');
+    const box = g('confirmBox');
+    const canShare = navigator.canShare && navigator.canShare({files: [reportFile]});
+    box.innerHTML = '<b>Message prêt.</b> 1) Envoyez le message WhatsApp qui vient de s\'ouvrir. 2) ' + (canShare
+      ? 'Envoyez aussi la photo :<br><button type="button" class="btn btn-primary" id="sharePhoto">Partager la photo</button>'
+      : 'Joignez la photo dans la conversation WhatsApp (bouton trombone).')
+      + '<br><a class="btn btn-ghost" target="_blank" rel="noopener" href="' + waUrl(text) + '">Rouvrir WhatsApp</a>';
+    box.classList.add('show');
+    if (canShare) g('sharePhoto').addEventListener('click', () => navigator.share({files: [reportFile], title: 'Photo ReTech'}).catch(() => {}));
+    window.open(waUrl(text), '_blank', 'noopener');
   }
 
-  // ---- Estimation indicative ----
-  // VALEURS DE DÉPART À CALIBRER avec vos vrais prix d'achat (FCFA).
-  const CFG = {
-    kg:    {cartes_meres:1500, industrielles:2500, plaquettes:900, composants:3000, appareils:150, autre:300},
-    piece: {cartes_meres:300, industrielles:800, plaquettes:150, composants:20, autre:100},
-    appareil: {'Radio':600, 'Téléviseur LCD/LED':1500, 'Téléviseur à tube':800, 'Ordinateur portable':2500,
-      'Ordinateur de bureau (unité centrale)':1500, "Écran d'ordinateur":700, 'Décodeur / récepteur':500,
-      'Chargeur / bloc secteur':200, 'Onduleur / stabilisateur':1200, 'Imprimante':600, 'Téléphone':400,
-      'Ampli / chaîne hi-fi':1000, 'Autre appareil':500}
-  };
-  const typeSel = document.getElementById('type');
-  Object.keys(CFG.appareil).forEach(k => { const o = document.createElement('option'); o.textContent = k; typeSel.appendChild(o); });
-  const val = id => document.getElementById(id).value;
-  function collect(){
-    const one = n => { const i = document.querySelector('input[name="' + n + '"]:checked'); return i ? i.value : null; };
-    const all = n => [...document.querySelectorAll('input[name="' + n + '"]:checked')].map(i => i.value);
-    return {cat: one('cat'), type: val('type'), poids: parseFloat(val('poids')) || 0, nb: parseInt(val('nb')) || 0,
-      forme: one('forme'), fonct: val('fonct'), degats: all('degat'), contient: all('contient')};
-  }
-  function calc(d){
-    if (!d.cat) return {err: "Choisissez d'abord ce que vous vendez (étape 1)."};
-    if (!d.poids && !d.nb) return {err: "Indiquez un poids ou un nombre de pièces (étape 2)."};
-    const app = d.cat === 'appareils';
-    let base, precis = true;
-    if (app) { base = d.nb ? d.nb * CFG.appareil[d.type] : d.poids * CFG.kg.appareils; precis = !!d.nb; }
-    else { base = d.poids ? d.poids * CFG.kg[d.cat] : d.nb * CFG.piece[d.cat]; precis = !!d.poids; }
-    let m = 1;
-    if (!app && d.forme === 'assemblees') m *= 0.6;
-    if (!app && d.forme === 'melange') m *= 0.8;
-    m *= {fonctionne:1.3, partiel:1, hs:0.8}[d.fonct];
-    if (d.degats.includes('brule')) m *= 0.7;
-    if (d.degats.includes('humide')) m *= 0.8;
-    if (d.degats.includes('casse')) m *= 0.9;
-    if (d.contient.includes('cpu')) m *= 1.15;
-    if (d.contient.includes('dores')) m *= 1.1;
-    if (!app && (d.contient.includes('radiateur') || d.contient.includes('batterie'))) m *= 0.85;
-    const v = base * m, e = precis ? 0.2 : 0.35, r50 = x => Math.round(x / 50) * 50;
-    return {lo: r50(v * (1 - e)), hi: r50(v * (1 + e)), precis};
-  }
-  function showEstimate(r){
-    const note = document.getElementById('estimateNote');
-    if (r.err) { document.getElementById('estimateValue').textContent = '—'; note.textContent = r.err; return; }
-    document.getElementById('estimateValue').textContent = r.lo + ' - ' + r.hi + ' FCFA';
-    note.textContent = r.precis ? "Estimation indicative : le prix final est confirmé après examen des pièces."
-      : "Estimation approximative (quantité incomplète) : ajoutez le poids ou le nombre de pièces pour l'affiner.";
-  }
-  function toggleCat(){
-    const c = collect().cat;
-    document.getElementById('typeWrap').classList.toggle('hide', c !== 'appareils');
-    document.getElementById('formeWrap').classList.toggle('hide', c === 'appareils');
-  }
-  document.querySelectorAll('input[name="cat"]').forEach(i => i.addEventListener('change', toggleCat));
-  document.getElementById('estimBtn').addEventListener('click', () => showEstimate(calc(collect())));
-  toggleCat();
+    let reportFile = null;
 
   // ---- Capture photo + déclenchement de l'analyse ----
   const fileDrop = document.getElementById('fileDrop');
@@ -817,6 +669,7 @@
   function onPhoto(inp){
     const file = inp.files[0];
     if (!file) return;
+    reportFile = file;
     const reader = new FileReader();
     reader.onload = () => {
       photoPreview.src = reader.result;
@@ -860,7 +713,6 @@
       const result = await response.json();
 
       if (result.fonct) document.getElementById('fonct').value = result.fonct;
-      showEstimate(calc(collect()));
 
       analyseStatus.textContent = `Analyse : ${result.type || '?'} — état ${result.etat || '?'} (confiance ${Math.round((result.confiance||0)*100)}%). Vous pouvez corriger avant d'envoyer.`;
       analyseStatus.className = 'analyse-status ok';
@@ -876,63 +728,106 @@
 
   analyseBtn.addEventListener('click', analyserPhoto);
 
+// ---- Catalogue : icône, catégorie, nom, description, variantes, stock ----
+  // À MODIFIER avec vos vrais stocks et prix (price: null = « Prix sur demande »).
+  // Les images sont des illustrations ; vous pourrez les remplacer par de vraies photos.
+  const ICON = {"res": "<path d=\"M4 32h12M48 32h12\"/><rect x=\"16\" y=\"23\" width=\"32\" height=\"18\" rx=\"8\"/><path d=\"M24 23v18M32 23v18M40 23v18\"/>", "cap": "<rect x=\"18\" y=\"12\" width=\"28\" height=\"38\" rx=\"4\"/><path d=\"M18 22h28M26 50v10M38 50v10M40 30v10\"/>", "disc": "<circle cx=\"32\" cy=\"26\" r=\"16\"/><path d=\"M26 42v16M38 42v16\"/>", "ind": "<path d=\"M4 38c0-14 10-14 10 0s10 14 10 0 10-14 10 0 10 14 10 0 10-14 10 0\"/>", "fuse": "<rect x=\"14\" y=\"24\" width=\"36\" height=\"16\" rx=\"8\"/><path d=\"M4 32h10M50 32h10M20 32h24\"/>", "xtal": "<rect x=\"20\" y=\"16\" width=\"24\" height=\"30\" rx=\"4\"/><path d=\"M26 46v12M38 46v12\"/>", "diode": "<path d=\"M4 32h16M44 32h16M20 20v24l24-12zM44 20v24\"/>", "bridge": "<rect x=\"14\" y=\"14\" width=\"36\" height=\"36\" rx=\"3\"/><path d=\"M22 50v10M42 50v10M22 14V4M42 14V4M26 32l6-8 6 8-6 8z\"/>", "to92": "<path d=\"M18 48V30a14 14 0 0128 0v18z\"/><path d=\"M24 48v12M32 48v12M40 48v12\"/>", "to220": "<rect x=\"14\" y=\"8\" width=\"36\" height=\"32\" rx=\"2\"/><circle cx=\"32\" cy=\"19\" r=\"5\"/><path d=\"M22 40v20M32 40v20M42 40v20\"/>", "ic": "<rect x=\"16\" y=\"10\" width=\"32\" height=\"44\" rx=\"3\"/><path d=\"M8 18h8M8 28h8M8 38h8M8 48h8M48 18h8M48 28h8M48 38h8M48 48h8\"/><circle cx=\"25\" cy=\"18\" r=\"2\"/>", "led": "<path d=\"M20 36V24a12 12 0 0124 0v12z\"/><path d=\"M16 36h32M26 36v22M38 36v22\"/>", "header": "<rect x=\"8\" y=\"26\" width=\"48\" height=\"12\" rx=\"2\"/><path d=\"M16 26V14M26 26V14M36 26V14M46 26V14M16 38v12M26 38v12M36 38v12M46 38v12\"/>", "port": "<rect x=\"10\" y=\"20\" width=\"44\" height=\"28\" rx=\"3\"/><rect x=\"20\" y=\"28\" width=\"24\" height=\"10\"/><path d=\"M24 48v8M40 48v8\"/>", "relay": "<rect x=\"10\" y=\"14\" width=\"44\" height=\"36\" rx=\"3\"/><path d=\"M20 24h14l10 10M20 40h12M18 50v8M46 50v8\"/>", "switch": "<rect x=\"12\" y=\"22\" width=\"40\" height=\"20\" rx=\"4\"/><rect x=\"28\" y=\"26\" width=\"12\" height=\"12\" rx=\"2\"/><path d=\"M20 42v12M44 42v12\"/>", "motor": "<rect x=\"8\" y=\"18\" width=\"34\" height=\"28\" rx=\"6\"/><path d=\"M42 32h16\"/><circle cx=\"25\" cy=\"32\" r=\"6\"/>", "fan": "<rect x=\"8\" y=\"8\" width=\"48\" height=\"48\" rx=\"6\"/><circle cx=\"32\" cy=\"32\" r=\"4\"/><path d=\"M32 28c-2-10 6-14 10-8M36 32c10-2 14 6 8 10M32 36c2 10-6 14-10 8M28 32c-10 2-14-6-8-10\"/>", "heat": "<path d=\"M8 54h48M14 54V22M24 54V12M34 54V12M44 54V22M54 54V30\"/>", "speaker": "<rect x=\"14\" y=\"8\" width=\"36\" height=\"48\" rx=\"4\"/><circle cx=\"32\" cy=\"38\" r=\"10\"/><circle cx=\"32\" cy=\"17\" r=\"3\"/>", "sensor": "<circle cx=\"32\" cy=\"28\" r=\"14\"/><path d=\"M32 18v10l7 4M24 42v16M40 42v16\"/>", "trafo": "<rect x=\"12\" y=\"12\" width=\"40\" height=\"40\" rx=\"3\"/><path d=\"M22 20v24M42 20v24M12 32H4M52 32h8\"/>", "adapter": "<rect x=\"14\" y=\"10\" width=\"36\" height=\"40\" rx=\"5\"/><path d=\"M26 10V2M38 10V2M32 50v10\"/><circle cx=\"32\" cy=\"30\" r=\"5\"/>", "display": "<rect x=\"8\" y=\"12\" width=\"48\" height=\"40\" rx=\"3\"/><path d=\"M16 22h12M16 32h12M16 42h12M16 22v20M28 22v20M36 22h12M36 32h12M36 42h12M36 22v20M48 22v20\"/>", "mobo": "<rect x=\"8\" y=\"8\" width=\"48\" height=\"48\" rx=\"3\"/><rect x=\"14\" y=\"14\" width=\"16\" height=\"16\"/><path d=\"M36 16h14M36 24h14M16 40h32M16 48h20\"/>", "ram": "<rect x=\"4\" y=\"20\" width=\"56\" height=\"22\" rx=\"2\"/><path d=\"M12 42v6M20 42v6M28 42v6M36 42v6M44 42v6M52 42v6\"/><rect x=\"12\" y=\"26\" width=\"8\" height=\"10\"/><rect x=\"28\" y=\"26\" width=\"8\" height=\"10\"/><rect x=\"44\" y=\"26\" width=\"8\" height=\"10\"/>", "board": "<rect x=\"8\" y=\"12\" width=\"48\" height=\"40\" rx=\"3\"/><path d=\"M16 24h12l6 8h14M16 40h18\"/><circle cx=\"16\" cy=\"24\" r=\"2\"/><circle cx=\"48\" cy=\"32\" r=\"2\"/>", "radio": "<rect x=\"8\" y=\"18\" width=\"48\" height=\"34\" rx=\"4\"/><circle cx=\"24\" cy=\"36\" r=\"9\"/><path d=\"M40 28h10M40 36h10M40 44h10M16 18l24-10\"/>"};
+  const svgIcon = k => '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (ICON[k] || ICON.board) + '</svg>';
+  const CATS = [['passifs','Passifs'],['semi','Semi-conducteurs'],['circuits','Circuits intégrés'],['connectique','Connectique'],['electromeca','Électromécanique'],['son','Son et capteurs'],['alim','Alimentation'],['affichage','Afficheurs'],['pc','Pièces d\'ordinateur'],['appareils','Appareils reconditionnés']];
+  const catName = k => (CATS.find(c => c[0] === k) || [k, k])[1];
+  const S = t => t.split('|');
   const parts = [
-    {cat:'passifs', badge:'Testé fonctionnel', name:'Résistances assorties (lot de 50)', desc:'Valeurs courantes 100Ω à 100kΩ, triées et mesurées.', price:null},
-    {cat:'passifs', badge:'Testé fonctionnel', name:'Condensateurs électrolytiques (assortiment)', desc:'10µF à 470µF, issus de cartes d\'alimentation.', price:null},
-    {cat:'actifs', badge:'Testé fonctionnel', name:'Transistors NPN 2N2222 (lot de 10)', desc:'Récupérés et vérifiés au traceur de courbes.', price:null},
-    {cat:'actifs', badge:'Testé fonctionnel', name:'Diodes de redressement (lot de 20)', desc:'Issues de blocs d\'alimentation, testées une à une.', price:null},
-    {cat:'modules', badge:'Testé fonctionnel', name:'Haut-parleur 8Ω 0.5W', desc:'Récupéré sur radio, son clair vérifié.', price:null},
-    {cat:'modules', badge:'Testé fonctionnel', name:'Carte alimentation 5V/12V', desc:'Sortie stable vérifiée sous charge.', price:null},
-    {cat:'appareils', badge:'Reconditionné', name:'Chargeur USB reconditionné', desc:'Boîtier nettoyé, sortie testée, câble neuf.', price:null},
-    {cat:'appareils', badge:'Reconditionné', name:'Radio FM reconditionnée', desc:'Réception et audio vérifiés, boîtier réparé.', price:null},
-    {cat:'modules', badge:'Testé fonctionnel', name:'Potentiomètres assortis (lot de 8)', desc:'Course vérifiée, sans grésillement.', price:null},
-  ];
+    ['res','passifs','Résistances ¼ W','Résistances à couche, triées et mesurées.',S('10 Ω|47 Ω|100 Ω|220 Ω|330 Ω|470 Ω|1 kΩ|2,2 kΩ|4,7 kΩ|10 kΩ|22 kΩ|47 kΩ|100 kΩ|220 kΩ|470 kΩ|1 MΩ'),200],
+    ['ind','passifs','Potentiomètres','Course vérifiée, sans grésillement.',S('1 kΩ|10 kΩ|50 kΩ|100 kΩ|500 kΩ|1 MΩ'),40],
+    ['cap','passifs','Condensateurs électrolytiques','Issus de cartes d\'alimentation et de cartes mères.',S('1 µF / 50 V|10 µF / 25 V|47 µF / 25 V|100 µF / 25 V|220 µF / 25 V|470 µF / 16 V|1000 µF / 16 V|2200 µF / 25 V'),120],
+    ['disc','passifs','Condensateurs céramiques','Petits condensateurs de découplage et de filtrage.',S('22 pF|100 pF|1 nF|10 nF|100 nF|1 µF'),150],
+    ['cap','passifs','Condensateurs film (MKT)','Pour filtrage et alimentations.',S('10 nF / 250 V|100 nF / 250 V|470 nF / 250 V|1 µF / 250 V'),35],
+    ['ind','passifs','Inductances (selfs)','Récupérées sur alimentations à découpage.',S('10 µH|100 µH|1 mH|10 mH'),30],
+    ['fuse','passifs','Fusibles','Fusibles verre 5×20 mm.',S('250 mA|500 mA|1 A|2 A|5 A|10 A'),60],
+    ['xtal','passifs','Quartz','Quartz et oscillateurs récupérés.',S('32,768 kHz|4 MHz|8 MHz|12 MHz|16 MHz|25 MHz'),25],
+    ['diode','semi','Diodes de redressement','Issues de blocs d\'alimentation, testées une à une.',S('1N4001|1N4007|1N5408|FR107|1N5819 (Schottky)|1N4148'),180],
+    ['diode','semi','Diodes Zener','Tension de référence vérifiée.',S('3,3 V|5,1 V|6,8 V|9,1 V|12 V|15 V'),70],
+    ['bridge','semi','Ponts redresseurs','Récupérés sur alimentations.',S('KBP307|KBL410|GBU806|W10'),22],
+    ['to92','semi','Transistors bipolaires','Vérifiés au traceur de courbes.',S('BC547|BC557|2N2222|2N3904|2N3906|TIP41C|TIP42C|2N3055'),90],
+    ['to220','semi','MOSFET de puissance','Issus de cartes mères et d\'alimentations.',S('IRF540|IRF630|IRFZ44N|IRF3205'),26],
+    ['to220','semi','Triacs et thyristors','Pour variateurs et commandes de puissance.',S('BT136 (triac)|BT151 (thyristor)|TYN612'),0],
+    ['ic','semi','Optocoupleurs','Isolation galvanique, testés.',S('PC817|4N35|EL817|MOC3021'),45],
+    ['led','semi','LED 5 mm','LED récupérées et allumées au test.',S('Rouge|Verte|Jaune|Bleue|Blanche|Infrarouge'),300],
+    ['to220','circuits','Régulateurs de tension','Régulateurs linéaires récupérés.',S('7805|7809|7812|7905|LM317|AMS1117-3.3'),55],
+    ['ic','circuits','Amplificateurs opérationnels','Circuits DIP et CMS.',S('LM358|LM324|TL072|NE5532'),40],
+    ['ic','circuits','Temporisateurs et logique','Circuits logiques et temporisateurs.',S('NE555|CD4017|CD4013|74HC595|74HC00'),50],
+    ['ic','circuits','Circuits audio et pilotes','Amplis audio et pilotes de moteurs.',S('LM386|TDA2030|TDA7297|L293D|ULN2003'),28],
+    ['ic','circuits','Mémoires (EEPROM / Flash)','Mémoires de série récupérées.',S('24C02|24C64|25Q16|25Q32'),33],
+    ['port','connectique','Prises jack et DC','Prises d\'alimentation et audio.',S('DC 5,5×2,1 mm|DC 5,5×2,5 mm|Jack 3,5 mm|Jack 6,35 mm'),60],
+    ['port','connectique','Connecteurs USB et réseau','Ports récupérés sur cartes.',S('USB-A femelle|USB-B|Micro-USB|USB-C|RJ45'),48],
+    ['header','connectique','Barrettes à broches','Mâles et femelles, à sécable.',S('Mâle 40 broches|Femelle 40 broches'),70],
+    ['header','connectique','Borniers à vis','Pour raccordement de fils.',S('2 pôles|3 pôles|4 pôles'),80],
+    ['relay','electromeca','Relais','Relais testés à la bobine et au contact.',S('5 V|12 V|24 V'),38],
+    ['switch','electromeca','Interrupteurs et boutons','Boutons, interrupteurs et dip-switch.',S('Poussoir|Interrupteur à glissière|Inverseur à bascule|Dip-switch 4 pôles|Encodeur rotatif'),110],
+    ['motor','electromeca','Moteurs','Moteurs d\'imprimantes, lecteurs et jouets.',S('DC 3–6 V|DC 12 V|Pas à pas (imprimante)|Vibreur'),24],
+    ['fan','electromeca','Ventilateurs','Ventilateurs de PC et d\'alimentations.',S('40 mm|60 mm|80 mm|120 mm'),36],
+    ['heat','electromeca','Dissipateurs','Dissipateurs aluminium récupérés.',S('TO-220|Processeur|Plaque aluminium'),44],
+    ['speaker','son','Haut-parleurs et buzzers','Récupérés sur radios et téléviseurs, son vérifié.',S('Haut-parleur 8 Ω 0,5 W|Haut-parleur 4 Ω 3 W|Buzzer actif 5 V|Buzzer passif'),52],
+    ['sensor','son','Capteurs','Capteurs récupérés et testés.',S('Récepteur infrarouge|Photorésistance (LDR)|Thermistance NTC 10 kΩ|Capteur PIR'),30],
+    ['trafo','alim','Transformateurs','Transformateurs d\'alimentation.',S('6 V|9 V|12 V|24 V'),18],
+    ['adapter','alim','Chargeurs et adaptateurs','Sortie vérifiée sous charge.',S('5 V 1 A|5 V 2 A|9 V 1 A|12 V 1 A|12 V 2 A|19 V (portable)'),42],
+    ['display','affichage','Afficheurs','Afficheurs 7 segments et LCD.',S('7 segments 1 chiffre|7 segments 4 chiffres|LCD 16×2|Matrice LED 8×8'),26],
+    ['mobo','pc','Cartes mères','Cartes mères testées au banc.',S('Intel LGA775|Intel LGA1155|AMD AM3|Carte mère portable'),9],
+    ['ram','pc','Mémoire RAM','Barrettes testées.',S('DDR2|DDR3|DDR3 portable (SO-DIMM)|DDR4'),32],
+    ['board','pc','Cartes et plaquettes','Cartes électroniques complètes, au lot.',null,15],
+    ['radio','appareils','Radio FM reconditionnée','Réception et audio vérifiés, boîtier réparé.',null,6],
+    ['adapter','appareils','Chargeur USB reconditionné','Boîtier nettoyé, sortie testée.',S('5 V 1 A|5 V 2 A'),12]
+  ].map(([icon, cat, name, desc, variants, stock]) => ({icon, cat, name, desc, variants, stock, price: null}));
 
   const grid = document.getElementById('shopGrid');
 
   function renderParts(filter){
+    const q = document.getElementById('search').value.toLowerCase().trim();
+    const list = parts.filter(p => (filter === 'tous' || p.cat === filter) && (p.name + ' ' + p.desc + ' ' + (p.variants || []).join(' ')).toLowerCase().includes(q));
     grid.innerHTML = '';
-    parts.filter(p => (filter === 'tous' || p.cat === filter) && (p.name + ' ' + p.desc).toLowerCase().includes(document.getElementById('search').value.toLowerCase().trim())).forEach(p => {
+    if (!list.length) { grid.innerHTML = '<p class="empty" style="grid-column:1/-1">Aucun composant trouvé.</p>'; return; }
+    list.forEach(p => {
+      const out = p.stock <= 0;
       const card = document.createElement('div');
       card.className = 'part';
-      card.innerHTML = `
-        <div class="part-tag"><span>${catLabel(p.cat)}</span><span class="badge">${p.badge}</span></div>
-        <div class="part-body">
-          <h3>${p.name}</h3>
-          <p>${p.desc}</p>
-        </div>
-        <div class="part-foot">
-          <span class="price">${p.price ? p.price + ' FCFA' : 'Prix sur demande'}</span>
-          <button class="buy-btn">Ajouter</button>
-        </div>
-      `;
+      card.innerHTML = '<div class="part-img">' + svgIcon(p.icon) + '</div>'
+        + '<div class="part-tag"><span>' + catName(p.cat) + '</span><span class="badge">' + (p.cat === 'appareils' ? 'Reconditionné' : 'Récupéré · testé') + '</span></div>'
+        + '<div class="part-body"><h3>' + p.name + '</h3><p>' + p.desc + '</p>'
+        + (p.variants ? '<select class="var-sel" aria-label="Choisir la valeur">' + p.variants.map(v => '<option>' + v + '</option>').join('') + '</select>' : '')
+        + '<div class="stock ' + (out ? 'out' : 'ok') + '">' + (out ? 'Rupture de stock' : 'En stock : ' + p.stock) + '</div></div>'
+        + '<div class="part-foot"><span class="price">' + (p.price ? p.price + ' FCFA' : 'Prix sur demande') + '</span>'
+        + '<div class="qty-add"><input class="qty-in" type="number" min="1" max="' + Math.max(p.stock, 1) + '" value="1" aria-label="Quantité"' + (out ? ' disabled' : '') + '><button type="button" class="buy-btn"' + (out ? ' disabled' : '') + '>Ajouter</button></div></div>';
       const btn = card.querySelector('.buy-btn');
-      if (cart[p.name]) { btn.textContent = 'Ajouté'; btn.classList.add('added'); }
-      btn.addEventListener('click', () => needAuth(() => { addToCart(p.name); btn.textContent = 'Ajouté'; btn.classList.add('added'); }));
+      btn.addEventListener('click', () => {
+        const sel = card.querySelector('.var-sel'), qIn = card.querySelector('.qty-in');
+        const n = Math.max(1, Math.min(p.stock, parseInt(qIn.value) || 1));
+        addToCart(p.variants ? p.name + ' — ' + sel.value : p.name, n);
+        btn.textContent = 'Ajouté ✓'; btn.classList.add('added');
+        setTimeout(() => { btn.textContent = 'Ajouter'; btn.classList.remove('added'); }, 1200);
+      });
       grid.appendChild(card);
     });
   }
 
-  function catLabel(cat){
-    return {passifs:'Composant passif', actifs:'Composant actif', modules:'Module', appareils:'Appareil'}[cat] || cat;
-  }
-
-  document.querySelectorAll('.filter-btn').forEach(btn=>{
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
-      btn.classList.add('active');
-      renderParts(btn.dataset.cat);
+  const filtersEl = document.getElementById('filters');
+  [['tous','Tous']].concat(CATS).forEach((c, i) => {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'filter-btn' + (i ? '' : ' active'); b.dataset.cat = c[0]; b.textContent = c[1];
+    b.addEventListener('click', () => {
+      filtersEl.querySelectorAll('.filter-btn').forEach(x => x.classList.remove('active'));
+      b.classList.add('active'); renderParts(c[0]);
     });
+    filtersEl.appendChild(b);
   });
 
-  // ---- Panier + WhatsApp ----
+    // ---- Panier + WhatsApp ----
   const cart = {};
   function openWA(text){
     window.open('https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(text), '_blank', 'noopener');
   }
   document.getElementById('waFloat').href = 'https://wa.me/' + WHATSAPP_NUMBER;
   function activeCat(){ return document.querySelector('.filter-btn.active').dataset.cat; }
-  function addToCart(name){ cart[name] = (cart[name] || 0) + 1; renderCart(); }
+  function addToCart(name, n){ cart[name] = (cart[name] || 0) + (n || 1); renderCart(); }
   function changeQty(name, d){
     cart[name] = (cart[name] || 0) + d;
     if (cart[name] <= 0) delete cart[name];
@@ -946,7 +841,7 @@
     updateCartBar();
     document.getElementById('orderBtn').style.display = names.length ? 'inline-block' : 'none';
     if (!names.length){ list.innerHTML = '<p class="empty">Votre panier est vide.</p><button type="button" class="btn btn-primary" id="goShop" style="margin-top:16px"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8z"/><path d="M9 8V6a3 3 0 016 0v2"/></svg>Aller à la boutique</button>';
-      document.getElementById('goShop').addEventListener('click', () => showView('boutique'));
+      document.getElementById('goShop').addEventListener('click', () => showView('accueil'));
       return; }
     list.innerHTML = names.map((n, i) => `<div class="cart-item"><span>${n}</span><span class="qty"><button data-i="${i}" data-d="-1">−</button><b>${cart[n]}</b><button data-i="${i}" data-d="1">+</button></span></div>`).join('');
     list.querySelectorAll('button').forEach(b => b.addEventListener('click', () => changeQty(names[b.dataset.i], +b.dataset.d)));
@@ -969,7 +864,7 @@
   function updateCartBar(){
     try {
       const n = Object.keys(cart).reduce((a, k) => a + cart[k], 0);
-      const on = n > 0 && document.getElementById('boutique').classList.contains('active');
+      const on = n > 0 && document.getElementById('accueil').classList.contains('active');
       document.getElementById('cartbar').classList.toggle('hide', !on);
       document.body.classList.toggle('has-cartbar', on);
       document.getElementById('cbText').textContent = n + (n > 1 ? ' articles' : ' article');
@@ -998,7 +893,6 @@
     markSeg();
   }
   themeBtn.addEventListener('click', () => applyTheme(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark'));
-  document.querySelector('.nav-inner').appendChild(themeBtn);
   applyTheme(document.documentElement.dataset.theme || 'light');
 
 function markSeg(){
