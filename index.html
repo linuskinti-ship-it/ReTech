@@ -438,7 +438,7 @@
 <section class="view active" id="accueil">
   <div class="wrap shop-intro">
     <h1>Composants électroniques récupérés et testés</h1>
-    <p>Choisissez vos pièces et ajoutez-les au panier. Un compte est demandé au moment de commander.</p>
+    <p>Tous nos composants sont d'occasion : récupérés sur des équipements électroniques jetés ou hors d'usage, puis testés. Ajoutez vos pièces au panier ; un compte est demandé au moment de commander.</p>
   </div>
   <div class="wrap filters" id="filters"></div>
   <div class="wrap"><input id="search" class="search" type="search" placeholder="Rechercher un composant (ex : résistance, diode, LED)"></div>
@@ -732,51 +732,63 @@
   // À MODIFIER avec vos vrais stocks et prix (price: null = « Prix sur demande »).
   // Les images sont des illustrations ; vous pourrez les remplacer par de vraies photos.
   const ICON = {"res": "<path d=\"M4 32h12M48 32h12\"/><rect x=\"16\" y=\"23\" width=\"32\" height=\"18\" rx=\"8\"/><path d=\"M24 23v18M32 23v18M40 23v18\"/>", "cap": "<rect x=\"18\" y=\"12\" width=\"28\" height=\"38\" rx=\"4\"/><path d=\"M18 22h28M26 50v10M38 50v10M40 30v10\"/>", "disc": "<circle cx=\"32\" cy=\"26\" r=\"16\"/><path d=\"M26 42v16M38 42v16\"/>", "ind": "<path d=\"M4 38c0-14 10-14 10 0s10 14 10 0 10-14 10 0 10 14 10 0 10-14 10 0\"/>", "fuse": "<rect x=\"14\" y=\"24\" width=\"36\" height=\"16\" rx=\"8\"/><path d=\"M4 32h10M50 32h10M20 32h24\"/>", "xtal": "<rect x=\"20\" y=\"16\" width=\"24\" height=\"30\" rx=\"4\"/><path d=\"M26 46v12M38 46v12\"/>", "diode": "<path d=\"M4 32h16M44 32h16M20 20v24l24-12zM44 20v24\"/>", "bridge": "<rect x=\"14\" y=\"14\" width=\"36\" height=\"36\" rx=\"3\"/><path d=\"M22 50v10M42 50v10M22 14V4M42 14V4M26 32l6-8 6 8-6 8z\"/>", "to92": "<path d=\"M18 48V30a14 14 0 0128 0v18z\"/><path d=\"M24 48v12M32 48v12M40 48v12\"/>", "to220": "<rect x=\"14\" y=\"8\" width=\"36\" height=\"32\" rx=\"2\"/><circle cx=\"32\" cy=\"19\" r=\"5\"/><path d=\"M22 40v20M32 40v20M42 40v20\"/>", "ic": "<rect x=\"16\" y=\"10\" width=\"32\" height=\"44\" rx=\"3\"/><path d=\"M8 18h8M8 28h8M8 38h8M8 48h8M48 18h8M48 28h8M48 38h8M48 48h8\"/><circle cx=\"25\" cy=\"18\" r=\"2\"/>", "led": "<path d=\"M20 36V24a12 12 0 0124 0v12z\"/><path d=\"M16 36h32M26 36v22M38 36v22\"/>", "header": "<rect x=\"8\" y=\"26\" width=\"48\" height=\"12\" rx=\"2\"/><path d=\"M16 26V14M26 26V14M36 26V14M46 26V14M16 38v12M26 38v12M36 38v12M46 38v12\"/>", "port": "<rect x=\"10\" y=\"20\" width=\"44\" height=\"28\" rx=\"3\"/><rect x=\"20\" y=\"28\" width=\"24\" height=\"10\"/><path d=\"M24 48v8M40 48v8\"/>", "relay": "<rect x=\"10\" y=\"14\" width=\"44\" height=\"36\" rx=\"3\"/><path d=\"M20 24h14l10 10M20 40h12M18 50v8M46 50v8\"/>", "switch": "<rect x=\"12\" y=\"22\" width=\"40\" height=\"20\" rx=\"4\"/><rect x=\"28\" y=\"26\" width=\"12\" height=\"12\" rx=\"2\"/><path d=\"M20 42v12M44 42v12\"/>", "motor": "<rect x=\"8\" y=\"18\" width=\"34\" height=\"28\" rx=\"6\"/><path d=\"M42 32h16\"/><circle cx=\"25\" cy=\"32\" r=\"6\"/>", "fan": "<rect x=\"8\" y=\"8\" width=\"48\" height=\"48\" rx=\"6\"/><circle cx=\"32\" cy=\"32\" r=\"4\"/><path d=\"M32 28c-2-10 6-14 10-8M36 32c10-2 14 6 8 10M32 36c2 10-6 14-10 8M28 32c-10 2-14-6-8-10\"/>", "heat": "<path d=\"M8 54h48M14 54V22M24 54V12M34 54V12M44 54V22M54 54V30\"/>", "speaker": "<rect x=\"14\" y=\"8\" width=\"36\" height=\"48\" rx=\"4\"/><circle cx=\"32\" cy=\"38\" r=\"10\"/><circle cx=\"32\" cy=\"17\" r=\"3\"/>", "sensor": "<circle cx=\"32\" cy=\"28\" r=\"14\"/><path d=\"M32 18v10l7 4M24 42v16M40 42v16\"/>", "trafo": "<rect x=\"12\" y=\"12\" width=\"40\" height=\"40\" rx=\"3\"/><path d=\"M22 20v24M42 20v24M12 32H4M52 32h8\"/>", "adapter": "<rect x=\"14\" y=\"10\" width=\"36\" height=\"40\" rx=\"5\"/><path d=\"M26 10V2M38 10V2M32 50v10\"/><circle cx=\"32\" cy=\"30\" r=\"5\"/>", "display": "<rect x=\"8\" y=\"12\" width=\"48\" height=\"40\" rx=\"3\"/><path d=\"M16 22h12M16 32h12M16 42h12M16 22v20M28 22v20M36 22h12M36 32h12M36 42h12M36 22v20M48 22v20\"/>", "mobo": "<rect x=\"8\" y=\"8\" width=\"48\" height=\"48\" rx=\"3\"/><rect x=\"14\" y=\"14\" width=\"16\" height=\"16\"/><path d=\"M36 16h14M36 24h14M16 40h32M16 48h20\"/>", "ram": "<rect x=\"4\" y=\"20\" width=\"56\" height=\"22\" rx=\"2\"/><path d=\"M12 42v6M20 42v6M28 42v6M36 42v6M44 42v6M52 42v6\"/><rect x=\"12\" y=\"26\" width=\"8\" height=\"10\"/><rect x=\"28\" y=\"26\" width=\"8\" height=\"10\"/><rect x=\"44\" y=\"26\" width=\"8\" height=\"10\"/>", "board": "<rect x=\"8\" y=\"12\" width=\"48\" height=\"40\" rx=\"3\"/><path d=\"M16 24h12l6 8h14M16 40h18\"/><circle cx=\"16\" cy=\"24\" r=\"2\"/><circle cx=\"48\" cy=\"32\" r=\"2\"/>", "radio": "<rect x=\"8\" y=\"18\" width=\"48\" height=\"34\" rx=\"4\"/><circle cx=\"24\" cy=\"36\" r=\"9\"/><path d=\"M40 28h10M40 36h10M40 44h10M16 18l24-10\"/>"};
+  Object.assign(ICON, {
+    hdd:'<rect x="8" y="12" width="48" height="40" rx="4"/><circle cx="26" cy="32" r="12"/><circle cx="26" cy="32" r="3"/><path d="M42 20l8 8M48 44h4"/>',
+    magnet:'<path d="M16 12v22a16 16 0 0032 0V12H38v22a6 6 0 01-12 0V12z"/><path d="M16 22h10M38 22h10"/>',
+    psu:'<rect x="6" y="14" width="52" height="36" rx="3"/><circle cx="24" cy="32" r="10"/><path d="M42 24h10M42 32h10M42 40h10"/>',
+    cable:'<path d="M6 20h12l8 24h12l8-24h12"/><rect x="2" y="16" width="8" height="8"/><rect x="54" y="16" width="8" height="8"/>',
+    ferrite:'<circle cx="32" cy="32" r="20"/><circle cx="32" cy="32" r="8"/><path d="M12 32H4M60 32h-8"/>'
+  });
   const svgIcon = k => '<svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (ICON[k] || ICON.board) + '</svg>';
   const CATS = [['passifs','Passifs'],['semi','Semi-conducteurs'],['circuits','Circuits intégrés'],['connectique','Connectique'],['electromeca','Électromécanique'],['son','Son et capteurs'],['alim','Alimentation'],['affichage','Afficheurs'],['pc','Pièces d\'ordinateur'],['appareils','Appareils reconditionnés']];
   const catName = k => (CATS.find(c => c[0] === k) || [k, k])[1];
   const S = t => t.split('|');
   const parts = [
-    ['res','passifs','Résistances ¼ W','Résistances à couche, triées et mesurées.',S('10 Ω|47 Ω|100 Ω|220 Ω|330 Ω|470 Ω|1 kΩ|2,2 kΩ|4,7 kΩ|10 kΩ|22 kΩ|47 kΩ|100 kΩ|220 kΩ|470 kΩ|1 MΩ'),200],
-    ['ind','passifs','Potentiomètres','Course vérifiée, sans grésillement.',S('1 kΩ|10 kΩ|50 kΩ|100 kΩ|500 kΩ|1 MΩ'),40],
-    ['cap','passifs','Condensateurs électrolytiques','Issus de cartes d\'alimentation et de cartes mères.',S('1 µF / 50 V|10 µF / 25 V|47 µF / 25 V|100 µF / 25 V|220 µF / 25 V|470 µF / 16 V|1000 µF / 16 V|2200 µF / 25 V'),120],
-    ['disc','passifs','Condensateurs céramiques','Petits condensateurs de découplage et de filtrage.',S('22 pF|100 pF|1 nF|10 nF|100 nF|1 µF'),150],
-    ['cap','passifs','Condensateurs film (MKT)','Pour filtrage et alimentations.',S('10 nF / 250 V|100 nF / 250 V|470 nF / 250 V|1 µF / 250 V'),35],
-    ['ind','passifs','Inductances (selfs)','Récupérées sur alimentations à découpage.',S('10 µH|100 µH|1 mH|10 mH'),30],
-    ['fuse','passifs','Fusibles','Fusibles verre 5×20 mm.',S('250 mA|500 mA|1 A|2 A|5 A|10 A'),60],
-    ['xtal','passifs','Quartz','Quartz et oscillateurs récupérés.',S('32,768 kHz|4 MHz|8 MHz|12 MHz|16 MHz|25 MHz'),25],
-    ['diode','semi','Diodes de redressement','Issues de blocs d\'alimentation, testées une à une.',S('1N4001|1N4007|1N5408|FR107|1N5819 (Schottky)|1N4148'),180],
-    ['diode','semi','Diodes Zener','Tension de référence vérifiée.',S('3,3 V|5,1 V|6,8 V|9,1 V|12 V|15 V'),70],
-    ['bridge','semi','Ponts redresseurs','Récupérés sur alimentations.',S('KBP307|KBL410|GBU806|W10'),22],
-    ['to92','semi','Transistors bipolaires','Vérifiés au traceur de courbes.',S('BC547|BC557|2N2222|2N3904|2N3906|TIP41C|TIP42C|2N3055'),90],
-    ['to220','semi','MOSFET de puissance','Issus de cartes mères et d\'alimentations.',S('IRF540|IRF630|IRFZ44N|IRF3205'),26],
-    ['to220','semi','Triacs et thyristors','Pour variateurs et commandes de puissance.',S('BT136 (triac)|BT151 (thyristor)|TYN612'),0],
-    ['ic','semi','Optocoupleurs','Isolation galvanique, testés.',S('PC817|4N35|EL817|MOC3021'),45],
-    ['led','semi','LED 5 mm','LED récupérées et allumées au test.',S('Rouge|Verte|Jaune|Bleue|Blanche|Infrarouge'),300],
-    ['to220','circuits','Régulateurs de tension','Régulateurs linéaires récupérés.',S('7805|7809|7812|7905|LM317|AMS1117-3.3'),55],
-    ['ic','circuits','Amplificateurs opérationnels','Circuits DIP et CMS.',S('LM358|LM324|TL072|NE5532'),40],
-    ['ic','circuits','Temporisateurs et logique','Circuits logiques et temporisateurs.',S('NE555|CD4017|CD4013|74HC595|74HC00'),50],
-    ['ic','circuits','Circuits audio et pilotes','Amplis audio et pilotes de moteurs.',S('LM386|TDA2030|TDA7297|L293D|ULN2003'),28],
-    ['ic','circuits','Mémoires (EEPROM / Flash)','Mémoires de série récupérées.',S('24C02|24C64|25Q16|25Q32'),33],
-    ['port','connectique','Prises jack et DC','Prises d\'alimentation et audio.',S('DC 5,5×2,1 mm|DC 5,5×2,5 mm|Jack 3,5 mm|Jack 6,35 mm'),60],
-    ['port','connectique','Connecteurs USB et réseau','Ports récupérés sur cartes.',S('USB-A femelle|USB-B|Micro-USB|USB-C|RJ45'),48],
-    ['header','connectique','Barrettes à broches','Mâles et femelles, à sécable.',S('Mâle 40 broches|Femelle 40 broches'),70],
-    ['header','connectique','Borniers à vis','Pour raccordement de fils.',S('2 pôles|3 pôles|4 pôles'),80],
-    ['relay','electromeca','Relais','Relais testés à la bobine et au contact.',S('5 V|12 V|24 V'),38],
-    ['switch','electromeca','Interrupteurs et boutons','Boutons, interrupteurs et dip-switch.',S('Poussoir|Interrupteur à glissière|Inverseur à bascule|Dip-switch 4 pôles|Encodeur rotatif'),110],
-    ['motor','electromeca','Moteurs','Moteurs d\'imprimantes, lecteurs et jouets.',S('DC 3–6 V|DC 12 V|Pas à pas (imprimante)|Vibreur'),24],
-    ['fan','electromeca','Ventilateurs','Ventilateurs de PC et d\'alimentations.',S('40 mm|60 mm|80 mm|120 mm'),36],
-    ['heat','electromeca','Dissipateurs','Dissipateurs aluminium récupérés.',S('TO-220|Processeur|Plaque aluminium'),44],
-    ['speaker','son','Haut-parleurs et buzzers','Récupérés sur radios et téléviseurs, son vérifié.',S('Haut-parleur 8 Ω 0,5 W|Haut-parleur 4 Ω 3 W|Buzzer actif 5 V|Buzzer passif'),52],
-    ['sensor','son','Capteurs','Capteurs récupérés et testés.',S('Récepteur infrarouge|Photorésistance (LDR)|Thermistance NTC 10 kΩ|Capteur PIR'),30],
-    ['trafo','alim','Transformateurs','Transformateurs d\'alimentation.',S('6 V|9 V|12 V|24 V'),18],
-    ['adapter','alim','Chargeurs et adaptateurs','Sortie vérifiée sous charge.',S('5 V 1 A|5 V 2 A|9 V 1 A|12 V 1 A|12 V 2 A|19 V (portable)'),42],
-    ['display','affichage','Afficheurs','Afficheurs 7 segments et LCD.',S('7 segments 1 chiffre|7 segments 4 chiffres|LCD 16×2|Matrice LED 8×8'),26],
-    ['mobo','pc','Cartes mères','Cartes mères testées au banc.',S('Intel LGA775|Intel LGA1155|AMD AM3|Carte mère portable'),9],
-    ['ram','pc','Mémoire RAM','Barrettes testées.',S('DDR2|DDR3|DDR3 portable (SO-DIMM)|DDR4'),32],
-    ['board','pc','Cartes et plaquettes','Cartes électroniques complètes, au lot.',null,15],
-    ['radio','appareils','Radio FM reconditionnée','Réception et audio vérifiés, boîtier réparé.',null,6],
-    ['adapter','appareils','Chargeur USB reconditionné','Boîtier nettoyé, sortie testée.',S('5 V 1 A|5 V 2 A'),12]
+    ['res','passifs','Résistances (valeurs courantes)','Récupérées sur radios, téléviseurs et alimentations, triées et mesurées.',S('10 Ω|100 Ω|220 Ω|470 Ω|1 kΩ|2,2 kΩ|4,7 kΩ|10 kΩ|22 kΩ|47 kΩ|100 kΩ|220 kΩ|470 kΩ|1 MΩ'),200],
+    ['ind','passifs','Potentiomètres','Extraits de radios et d\'amplis, course vérifiée.',S('10 kΩ|50 kΩ|100 kΩ|500 kΩ'),40],
+    ['cap','passifs','Condensateurs électrolytiques','Extraits d\'alimentations et de cartes mères, capacité contrôlée.',S('10 µF / 25 V|47 µF / 25 V|100 µF / 25 V|220 µF / 25 V|470 µF / 16 V|1000 µF / 16 V|2200 µF / 25 V'),120],
+    ['disc','passifs','Condensateurs céramiques','Extraits de téléviseurs et de cartes anciennes.',S('100 pF|1 nF|10 nF|100 nF'),150],
+    ['cap','passifs','Condensateurs film','Extraits d\'alimentations et de téléviseurs.',S('100 nF / 250 V|470 nF / 250 V|1 µF / 250 V'),35],
+    ['ind','passifs','Inductances et selfs','Extraites d\'alimentations à découpage.',S('10 µH|100 µH|1 mH|Self de mode commun'),30],
+    ['disc','passifs','Thermistances et varistances','Extraites d\'alimentations (limiteurs de courant, protections).',S('NTC 5 Ω|NTC 10 kΩ|CTP|Varistance 275 V'),28],
+    ['fuse','passifs','Fusibles','Récupérés sur alimentations et appareils.',S('250 mA|1 A|2 A|5 A'),60],
+    ['xtal','passifs','Quartz','Extraits de cartes électroniques.',S('4 MHz|8 MHz|12 MHz|16 MHz|25 MHz|32,768 kHz'),25],
+    ['diode','semi','Diodes','Extraites d\'alimentations et de chargeurs, testées une à une.',S('Redressement 1 A (1N400x)|Redressement 3 A (1N540x)|Rapide (FR)|Schottky|Zener 5,1 V|Zener 12 V'),180],
+    ['bridge','semi','Ponts redresseurs','Extraits d\'alimentations et de téléviseurs.',S('1 A|2 A|4 A|8 A'),22],
+    ['to92','semi','Transistors','Extraits de radios, d\'amplis et de cartes.',S('2N3055 (puissance)|TIP41 / TIP42|BC547 / BC557|2N2222|Autre (sur demande)'),90],
+    ['to220','semi','MOSFET de puissance','Extraits d\'alimentations ATX et de cartes mères.',S('Canal N (type IRF)|Canal N CMS|Canal P'),26],
+    ['to220','semi','Triacs et thyristors','Extraits d\'appareils électroménagers.',S('Triac 4 A|Triac 8 A|Thyristor'),0],
+    ['ic','semi','Optocoupleurs','Extraits d\'alimentations et de chargeurs.',S('PC817|4N35|MOC30xx'),45],
+    ['led','semi','LED','Extraites de téléviseurs, décodeurs et appareils, allumées au test.',S('Rouge|Verte|Jaune|Bleue|Blanche|Infrarouge (télécommande)'),300],
+    ['to220','circuits','Régulateurs de tension','Extraits de cartes et d\'alimentations.',S('7805|7812|LM317|AMS1117'),55],
+    ['ic','circuits','Amplificateurs audio','Extraits de radios, d\'amplis et de téléviseurs.',S('LM386|TDA2030|TDA7297|Autres'),28],
+    ['ic','circuits','Circuits de commande de moteurs','Extraits d\'imprimantes et de lecteurs.',S('L293D|ULN2003|Autres'),20],
+    ['ic','circuits','Logique et temporisateurs','Extraits de cartes anciennes.',S('555|CD40xx|74HCxx|Autres'),40],
+    ['ic','circuits','Mémoires','Extraites de cartes mères et de décodeurs.',S('EEPROM 24Cxx|Flash BIOS 25Qxx'),33],
+    ['port','connectique','Prises jack et DC','Extraites de chargeurs, radios et cartes.',S('DC 5,5×2,1 mm|DC 5,5×2,5 mm|Jack 3,5 mm|Jack 6,35 mm'),60],
+    ['port','connectique','Connecteurs USB, réseau et vidéo','Extraits de cartes mères et de routeurs.',S('USB-A|Micro-USB|RJ45|HDMI|VGA'),48],
+    ['header','connectique','Barrettes à broches','Dessoudées de cartes, mâles et femelles.',S('Mâle|Femelle'),70],
+    ['header','connectique','Borniers à vis','Extraits d\'alimentations et d\'appareils.',S('2 pôles|3 pôles|4 pôles'),80],
+    ['cable','connectique','Câbles et nappes','Nappes, câbles SATA et fils de câblage de récupération.',S('Nappe IDE / SATA|Câble SATA|Fil de câblage|Câble d\'alimentation'),55],
+    ['relay','electromeca','Relais','Extraits d\'appareils et de cartes de commande.',S('5 V|12 V|24 V|Relais de puissance'),38],
+    ['switch','electromeca','Interrupteurs et boutons','Extraits d\'appareils usagés.',S('Poussoir|Interrupteur à glissière|Bascule|Dip-switch|Encodeur rotatif'),110],
+    ['motor','electromeca','Moteurs','Extraits d\'imprimantes, de lecteurs CD/DVD et de jouets.',S('DC petit|DC 12 V|Pas à pas|Vibreur'),24],
+    ['fan','electromeca','Ventilateurs','Extraits d\'ordinateurs et d\'alimentations.',S('40 mm|60 mm|80 mm|120 mm'),36],
+    ['heat','electromeca','Dissipateurs','Extraits de cartes, de processeurs et d\'alimentations.',S('TO-220|Processeur|Plaque aluminium'),44],
+    ['magnet','electromeca','Aimants néodyme','Extraits de disques durs.',S('Lot de 2 aimants'),16],
+    ['speaker','son','Haut-parleurs et buzzers','Extraits de radios et de téléviseurs, son vérifié.',S('8 Ω petit|8 Ω moyen|4 Ω 3 W et plus|Buzzer'),52],
+    ['sensor','son','Capteurs','Extraits de téléviseurs, décodeurs et appareils.',S('Récepteur infrarouge|Thermistance NTC'),30],
+    ['trafo','alim','Transformateurs','Extraits de chargeurs, de radios et d\'alimentations.',S('6 V|9 V|12 V|24 V|Transfo ferrite'),18],
+    ['ferrite','alim','Tores de ferrite','Extraits d\'alimentations et de câbles.',null,40],
+    ['psu','alim','Alimentations ATX','Alimentations de PC récupérées, testées au banc.',S('200–300 W|350–450 W|500 W et plus'),10],
+    ['adapter','alim','Chargeurs et adaptateurs','Récupérés et testés sous charge.',S('5 V 1 A|5 V 2 A|9 V 1 A|12 V 1 A|12 V 2 A|19 V (portable)'),42],
+    ['display','affichage','Afficheurs','Extraits d\'appareils électroménagers et de décodeurs.',S('7 segments 1 chiffre|7 segments 4 chiffres|Petit LCD'),26],
+    ['mobo','pc','Cartes mères','Cartes mères d\'ordinateurs récupérés, testées au banc.',S('Intel LGA775|Intel LGA1155|AMD AM3|Carte mère portable'),9],
+    ['ram','pc','Mémoire RAM','Barrettes récupérées et testées.',S('DDR2|DDR3|DDR3 portable (SO-DIMM)'),32],
+    ['hdd','pc','Disques durs','Récupérés, testés ou vendus pour pièces.',S('2,5" portable|3,5" fixe|Pour pièces'),14],
+    ['board','pc','Cartes et plaquettes','Cartes électroniques complètes, au lot, à dessouder ou à réutiliser.',null,15],
+    ['radio','appareils','Radio FM reconditionnée','Appareil récupéré, réparé : réception et audio vérifiés.',null,6],
+    ['adapter','appareils','Chargeur USB reconditionné','Appareil récupéré, boîtier nettoyé, sortie testée.',S('5 V 1 A|5 V 2 A'),12]
   ].map(([icon, cat, name, desc, variants, stock]) => ({icon, cat, name, desc, variants, stock, price: null}));
 
   const grid = document.getElementById('shopGrid');
