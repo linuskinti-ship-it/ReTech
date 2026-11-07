@@ -16,20 +16,20 @@ const ICONES = {
 };
 
 const COMPOSANTS = [
-  { id: "cond", nom: "Résistances", prix: 75, unite: "l'unité", source: "Cartes mères\n", photo: "photos/resistances-valeurs-courantes.jpeg" },
-  { id: "res",  nom: "Condensateurs-ceramiques", prix: 400, unite: "lot de 10", source: "Plaquettes électroniques\n", photo: "photos/condensateurs-ceramiques.jpeg", icone: "resistance" },
-  { id: "led",  nom: "Condensateurs-film", prix: 50, unite: "l'unité", source: "Plaquettes électroniques\n", photo: "photos/condensateurs-film.jpeg", icone: "led" },
-  { id: "ci",   nom: "Condensateurs-électrolytique", prix: 100, unite: "l'unité", source: "Plaquettes/chargeurs\n", photo: "photos/Capture d’écran_6-11-2026_15522_www.bing.com.jpeg", icone: "circuit" },
-  { id: "tr",   nom: "Fusibles", prix: 200, unite: "l'unité", source: "Radios & chargeurs\n", photo: "photos/fusibles.jpeg", icone: "transistor" },
-  { id: "con",  nom: "Inductances-et-selfs", prix: 300, unite: "l'unité", source: "Régulateurs/Onduleurs\n", photo: "photos/inductances-et-selfs.jpeg", icone: "connecteur" },
-  { id: "bob",  nom: "Potentiometres", prix: 500, unite: "l'unité", source: "Alimentations\n", photo: "photos/potentiometres.jpeg", icone: "bobine" },
-  { id: "dio",  nom: "Quartz", prix: 100, unite: "lot de 5", source: "Déchets électroniques\n", photo: "photos/quartz.jpeg", icone: "diode" }
+  { id: "cond", nom: "Résistances", prix: 75, unite: "l'unité", source: "Cartes mères\n", photo: "resistances-valeurs-courantes.jpeg" },
+  { id: "res",  nom: "Condensateurs-ceramiques", prix: 400, unite: "lot de 10", source: "Plaquettes électroniques\n", photo: "condensateurs-ceramiques.jpeg", icone: "resistance" },
+  { id: "led",  nom: "Condensateurs-film", prix: 50, unite: "l'unité", source: "Plaquettes électroniques\n", photo: "condensateurs-film.jpeg", icone: "led" },
+  { id: "ci",   nom: "Condensateurs-électrolytique", prix: 100, unite: "l'unité", source: "Plaquettes/chargeurs\n", photo: "Capture d’écran_6-11-2026_15522_www.bing.com.jpeg", icone: "circuit" },
+  { id: "tr",   nom: "Fusibles", prix: 200, unite: "l'unité", source: "Radios & chargeurs\n", photo: "fusibles.jpeg", icone: "transistor" },
+  { id: "con",  nom: "Inductances-et-selfs", prix: 300, unite: "l'unité", source: "Régulateurs/Onduleurs\n", photo: "inductances-et-selfs.jpeg", icone: "connecteur" },
+  { id: "bob",  nom: "Potentiometres", prix: 500, unite: "l'unité", source: "Alimentations\n", photo: "potentiometres.jpeg", icone: "bobine" },
+  { id: "dio",  nom: "Quartz", prix: 100, unite: "lot de 5", source: "Déchets électroniques\n", photo: "quartz.jpeg", icone: "diode" }
 ];
 
 // Images des étapes : mettez vos photos dans le dossier "photos" avec ces noms.
 const ETAPES = [
-  { titre: "Collecte", texte: "Nous récupérons plaquettes et déchets électroniques.", photo: "photos/GettyImages-1080141566.width-358.jpg", emoji: "🚚" },
-  { titre: "Démontage", texte: "Les composants sont retirés avec soin.", photo: "photos/i-img1200x900-1682866859gcyuih861013.jpg", emoji: "🔧" },
-  { titre: "Test & tri", texte: "Chaque pièce est vérifiée et classée.", photo: "photos/IMG_20260908_110342_059@2130601345.jpg", emoji: "🔬" },
-  { titre: "Vente", texte: "Les composants recyclés sont prêts à être achetés.", photo: "photos/Capture d’écran_7-11-2026_10247_www.bing.com.jpeg", emoji: "🛒" }
+  { titre: "Collecte", texte: "Nous récupérons plaquettes et déchets électroniques.", photo: "GettyImages-1080141566.width-358.jpg", emoji: "🚚" },
+  { titre: "Démontage", texte: "Les composants sont retirés avec soin.", photo: "i-img1200x900-1682866859gcyuih861013.jpg", emoji: "🔧" },
+  { titre: "Test & tri", texte: "Chaque pièce est vérifiée et classée.", photo: "IMG_20260908_110342_059@2130601345.jpg", emoji: "🔬" },
+  { titre: "Vente", texte: "Les composants recyclés sont prêts à être achetés.", photo: "Capture d’écran_7-11-2026_10247_www.bing.com.jpeg", emoji: "🛒" }
 ];
