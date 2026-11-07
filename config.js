@@ -2,7 +2,7 @@
 const CONFIG = {
   // Numéro WhatsApp au format international, sans "+" ni espaces
   // 229 = indicatif du Bénin, puis 0197979797
-  whatsapp: "2290197979797",
+  whatsapp: "2290148155877",
   devise: "FCFA"
 };
 
