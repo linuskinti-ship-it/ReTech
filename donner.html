@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Donner vos déchets - ReTech</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header class="entete">
+    <a href="index.html" class="logo">Re<span>Tech</span></a>
+    <a href="index.html" class="btn-don">← Accueil</a>
+  </header>
+
+  <main class="conteneur-form">
+    <h1>Donner vos déchets</h1>
+    <p>Remplissez ce formulaire pour nous proposer vos déchets électroniques.</p>
+
+    <form id="formDon">
+      <label for="nom">Nom</label>
+      <input type="text" id="nom" required placeholder="Votre nom complet">
+
+      <label for="numero">Numéro de téléphone</label>
+      <input type="tel" id="numero" required placeholder="+229 00 00 00 00">
+
+      <label for="image">Image du déchet</label>
+      <input type="file" id="image" accept="image/*" required>
+      <img id="apercu" alt="Aperçu du déchet">
+
+      <label for="localisation">Localisation</label>
+      <div class="ligne-loc">
+        <input type="text" id="localisation" required placeholder="Quartier, ville...">
+        <button type="button" id="btnLoc" class="btn-sec">📍 Me localiser</button>
+      </div>
+
+      <label>Type de proposition</label>
+      <div class="choix">
+        <label><input type="radio" name="type" value="don" checked> 🎁 Don</label>
+        <label><input type="radio" name="type" value="vente"> 💰 Vente</label>
+      </div>
+
+      <button type="submit" class="btn-envoyer">Envoyer</button>
+      <div id="message" class="message"></div>
+    </form>
+  </main>
+
+  <footer class="pied">© 2026 ReTech</footer>
+
+  <script src="config.js"></script>
+  <script src="donner.js"></script>
+</body>
+</html>
