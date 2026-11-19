@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://linuskinti-ship-it.github.io/mon-portfolio/sitemap.xml

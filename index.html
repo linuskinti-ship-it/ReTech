@@ -2,43 +2,199 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>ReTech - Composants électroniques récupérés</title>
-  <link rel="stylesheet" href="style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Linus KINTI – Technicien Supérieur en Équipements Motorisés</title>
+  <meta name="description" content="Découvrez le portfolio de Linus KINTI, technicien supérieur en équipements motorisés : mécanique, électronique, systèmes embarqués et énergie solaire.">
+  <meta name="robots" content="index,follow,max-image-preview:large">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="fr_FR">
+  <meta property="og:title" content="Linus KINTI – Technicien supérieur en équipements motorisés">
+  <meta property="og:description" content="Mécanique automobile, électronique, systèmes embarqués et énergie solaire.">
+  <meta property="og:image" content="https://linuskinti-ship-it.github.io/mon-portfolio/images/aperçu-social.png">
+  <meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Linus KINTI – Portfolio">
+  <meta name="twitter:description" content="Mécanique, électronique, systèmes embarqués et énergie solaire.">
+  <meta name="twitter:image" content="https://linuskinti-ship-it.github.io/mon-portfolio/images/aperçu-social.png">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="favicon.ico" sizes="any">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <meta name="theme-color" content="#0c1b33">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
-  <header class="entete">
-    <a href="index.html" class="logo">Re<span>Tech - Yesunana</span></a>
-    <a href="donner.html" class="btn-don">♻️ Donner vos déchets</a>
+  <a class="skip-link" href="#top">Aller au contenu</a>
+  <header class="site-header">
+    <div class="wrap bar">
+      <a class="brand" href="#top"><span class="mark">LK</span><span>Linus KINTI</span></a>
+      <button class="menu-btn" aria-label="Ouvrir le menu" aria-expanded="false">Menu</button>
+      <nav id="nav">
+        <a href="#apropos">À propos</a>
+        <a href="#parcours">Parcours</a>
+        <a href="#competences">Compétences</a>
+        <a href="#projets">Projets</a>
+        <a href="#travaux">Travaux</a>
+        <a class="nav-cta" href="#contact">Contact</a>
+      </nav>
+    </div>
   </header>
 
-  <main>
+  <main id="top">
     <section class="hero">
-      <h1>Acheter vos composants électroniques récupérés</h1>
-    </section>
-
-    <section class="defilement">
-      <!--<h2>Composants recyclés issus de plaquettes et déchets électroniques</h2>-->
-      <div class="rail">
-        <button class="fleche" id="prec" aria-label="Précédent">‹</button>
-        <div class="piste" id="piste"></div>
-        <button class="fleche" id="suiv" aria-label="Suivant">›</button>
+      <div class="wrap hero-grid">
+        <div class="hero-text">
+          <p class="role">Technicien Supérieur en Équipements Motorisés</p>
+          <h1>Linus KINTI</h1>
+          <p class="fullname">Yénanséa Houégnon Prince Linus KINTI</p>
+          <p class="lead">Je diagnostique, répare, conçois et programme : mécanique automobile, électronique, énergie solaire et systèmes embarqués. Formateur en électronique, basé à Abomey (Bénin).</p>
+          <div class="actions">
+            <a class="btn primary" href="#contact">Me contacter</a>
+            <a class="text-link" href="#projets">Découvrir mes projets</a>
+          </div>
+        </div>
+        <figure class="photo-frame">
+          <img src="images/photo.jpg" alt="Linus KINTI en blouse de travail et casque de chantier" onerror="this.parentElement.classList.add('no-photo')">
+          <span class="initials" aria-hidden="true">LK</span>
+        </figure>
       </div>
     </section>
 
-    <section class="etapes" id="etapes"></section>
+    <div class="facts">
+      <div class="wrap facts-grid">
+        <p><strong>2026</strong><span>Licence professionnelle obtenue</span></p>
+        <p><strong>3</strong><span>stages en atelier et en laboratoire</span></p>
+        <p><strong>6</strong><span>travaux techniques réalisés</span></p>
+        <p><strong>4</strong><span>formations complémentaires</span></p>
+      </div>
+    </div>
+
+    <section id="apropos" class="section">
+      <div class="wrap">
+        <h2>À propos</h2>
+        <div class="two-col">
+          <p>Technicien supérieur en équipements motorisés, titulaire d’une licence professionnelle obtenue en 2026 (ENSGEP/UNSTIM). Mon profil est polyvalent et technique : mécanique automobile, électromécanique, électronique, systèmes embarqués, automatismes industriels et systèmes énergétiques.</p>
+          <p>Je suis habitué aux travaux pratiques, au diagnostic, à l’analyse technique et aux outils de conception et de simulation. Je souhaite contribuer à des projets techniques tout en développant continuellement mes compétences.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="parcours" class="section alt">
+      <div class="wrap">
+        <h2>Parcours</h2>
+        <div class="cols">
+          <div>
+            <h3>Expériences</h3>
+            <ul class="timeline">
+              <li><span class="date">2025 – 2026</span><strong>Formateur en électronique</strong><em>Club d’Électronique : Electrodeclic / UNSTIM, Abomey</em><p>Encadrement d’étudiants en travaux pratiques d’électronique embarquée.</p></li>
+              <li><span class="date">2026 · 3 mois</span><strong>Stagiaire de fin de formation</strong><em>Yesunana Laboratory, Abomey</em><p>Énergies et systèmes énergétiques, électronique, informatique.</p></li>
+              <li><span class="date">2025 · 2 mois</span><strong>Stagiaire en mécanique automobile</strong><em>Garage St Emmanuel (Ets BIKO), Dassa-Zoumé</em><p>Immersion pratique et interventions techniques en atelier.</p></li>
+              <li><span class="date">2024 · 1 mois</span><strong>Stagiaire en mécanique automobile</strong><em>CFPA, Abomey</em><p>Travaux pratiques et opérations de maintenance automobile.</p></li>
+            </ul>
+          </div>
+          <div>
+            <h3>Formations</h3>
+            <ul class="timeline">
+              <li><span class="date">2023 – 2026</span><strong>Licence professionnelle en Équipements Motorisés</strong><em>ENSGEP / UNSTIM, Abomey · diplôme obtenu le 15 juillet 2026</em></li>
+              <li><span class="date">2024</span><strong>Baccalauréat série D</strong><em>CEG 2 Dassa-Zoumé</em></li>
+              <li><span class="date">2023</span><strong>Baccalauréat série C</strong><em>CEG 1 Dassa-Zoumé</em></li>
+            </ul>
+            <h3 class="spaced">Formations complémentaires</h3>
+            <ul class="plain">
+              <li><span class="date">2026</span>Maintenance et technologie des équipements marins</li>
+              <li><span class="date">2026</span>Turbomachines (turbomoteur, turboréacteur, turbopropulseur…)</li>
+              <li><span class="date">2025</span>Maintenance hydraulique des engins de travaux publics</li>
+              <li><span class="date">2025</span>Entrepreneuriat</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="competences" class="section">
+      <div class="wrap">
+        <h2>Compétences</h2>
+        <div class="domains">
+          <article class="domain">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+            <h3>Mécanique et équipements</h3>
+            <ul><li>Diagnostic et maintenance automobile</li><li>Circuits électriques des moteurs essence et diesel</li><li>Distribution des moteurs thermiques</li><li>Maintenance des équipements et systèmes mécaniques</li><li>Maintenance hydraulique des engins de travaux publics</li></ul>
+          </article>
+          <article class="domain">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="16" height="16" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M15 2v2M15 20v2M2 15h2M2 9h2M20 15h2M20 9h2M9 2v2M9 20v2"/></svg>
+            <h3>Électronique et automatisme</h3>
+            <ul><li>Électronique de base et circuits imprimés</li><li>Systèmes embarqués</li><li>Mécatronique</li><li>Automatisme industriel</li></ul>
+          </article>
+          <article class="domain">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2m-7.07-15.07 1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41m14.14-14.14-1.41 1.41"/></svg>
+            <h3>Énergie</h3>
+            <ul><li>Systèmes énergétiques</li><li>Énergies renouvelables (solaire)</li><li>Dimensionnement et analyse de systèmes solaires photovoltaïques</li></ul>
+          </article>
+        </div>
+
+        <h3 class="spaced">Logiciels maîtrisés</h3>
+        <div class="software">
+          <div><h4>Conception et dessin</h4><ul class="tags"><li>SolidWorks</li><li>AutoCAD</li><li>AutoGEM</li></ul></div>
+          <div><h4>Électronique et simulation</h4><ul class="tags"><li>Proteus</li><li>Arduino IDE</li></ul></div>
+          <div><h4>Programmation</h4><ul class="tags"><li>Python</li></ul></div>
+        </div>
+
+        <dl class="extras">
+          <div><dt>Qualités</dt><dd>Rigueur · Esprit d’analyse · Adaptabilité · Travail en équipe · Apprentissage continu</dd></div>
+          <div><dt>Langues</dt><dd>Français (courant) · Anglais (basique)</dd></div>
+          <div><dt>Centres d’intérêt</dt><dd>Basketball · Échecs · Logique</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section id="projets" class="section alt">
+      <div class="wrap">
+        <h2>Projets</h2>
+        <div id="filters" class="filters" role="group" aria-label="Filtrer les projets par domaine"></div>
+        <div id="projects-grid" class="projects"></div>
+      </div>
+    </section>
+
+    <section id="travaux" class="section">
+      <div class="wrap">
+        <h2>Travaux techniques</h2>
+        <div class="table-scroll">
+          <table class="works">
+            <thead><tr><th>Année</th><th>Travail réalisé</th><th>Lieu</th></tr></thead>
+            <tbody>
+              <tr><td>2023–2025</td><td>Maquettes de circuits électroniques imprimés</td><td>ENSGEP</td></tr>
+              <tr><td>2024</td><td>Maintenance et dimensionnement de groupes électrogènes</td><td>ENSGEP</td></tr>
+              <tr><td>2024</td><td>Circuits électriques des moteurs essence et diesel</td><td>EPAC</td></tr>
+              <tr><td>2025</td><td>Distribution des moteurs thermiques</td><td>CFPA</td></tr>
+              <tr><td>2025</td><td>Mécatronique</td><td>EPAC</td></tr>
+              <tr><td>2025</td><td>Automatisme industriel</td><td>INSTI</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="contact">
+      <div class="wrap">
+        <h2>Contact</h2>
+        <p class="contact-lead">Une mission, un stage, une collaboration ? Écrivez-moi.</p>
+        <div class="actions">
+          <a class="btn primary" href="mailto:linuskinti@gmail.com">linuskinti@gmail.com</a>
+          <a class="btn ghost" href="tel:+2290141618684">+229 01 41 61 86 84</a>
+          <a class="btn ghost" href="https://linkedin.com/in/linus-kinti" target="_blank" rel="noopener">LinkedIn</a>
+        </div>
+        <p class="place">Abomey, Zou, Bénin</p>
+      </div>
+    </section>
   </main>
 
-  <div class="barre-panier" id="barrePanier">
-    <span id="resumePanier"></span>
-    <button id="btnCommander" class="btn-envoyer">Commander sur WhatsApp</button>
-  </div>
-
-  <footer class="pied">© 2026 ReTech - Donnons une seconde vie à l'électronique.</footer>
-
-  <script src="config.js"></script>
-  <script src="composants.js"></script>
-  <script src="accueil.js"></script>
+  <footer><p>© <span id="year">2026</span> Yénanséa Houégnon Prince Linus KINTI</p><p class="footer-links"><a href="privacite.html">Confidentialité</a><a href="conditions.html">Conditions générales</a></p></footer>
+  <aside class="cookie-banner" id="cookie-banner" aria-label="Préférences de confidentialité" hidden>
+    <div><strong>Respect de votre vie privée</strong><p>Ce portfolio n'utilise pas de cookies publicitaires ni de mesure d'audience. Votre choix est mémorisé uniquement dans votre navigateur.</p><a href="privacite.html">Lire la politique de confidentialité</a></div>
+    <div class="cookie-actions"><button type="button" class="cookie-accept" id="cookie-accept">Accepter</button><button type="button" class="cookie-reject" id="cookie-reject">Refuser</button></div>
+  </aside>
+  <script src="js/script.js" defer></script>
 </body>
 </html>
